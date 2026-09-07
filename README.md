@@ -29,21 +29,25 @@ Every skill asks **one question at a time**, offers you options with a recommend
 ## Quick start
 
 ```bash
-# Install every skill
-npx skills add NickDabizaz/skills --all
+# Recommended: pick your skills and your agents when prompted
+npx skills add NickDabizaz/skills
 
-# Or browse first
+# Browse what is in here without installing anything
 npx skills add NickDabizaz/skills --list
 
-# Or take just the ones you want
+# Take only the ones you want
 npx skills add NickDabizaz/skills --skill discuss --skill implement --skill review
 
-# Install globally instead of into the current project
-npx skills add NickDabizaz/skills --all -g
+# Choose the agents yourself
+npx skills add NickDabizaz/skills -a claude-code -a codex
 
-# Target specific agents
-npx skills add NickDabizaz/skills --all -a claude-code -a codex
+# Install for every project instead of just this one
+npx skills add NickDabizaz/skills -g
 ```
+
+> **A note on `--all`.** It is shorthand for `--skill '*' --agent '*' -y`: every skill, **every agent the CLI can detect**, and no prompts. That writes `.claude/`, `.agents/`, `agent/` and a `skills-lock.json` into your folder in one go. Handy in CI, surprising on a laptop — prefer the plain command above and answer the prompts. Note also that when the CLI detects it is running inside an agent session, it goes non-interactive on its own and picks the agent for you.
+
+Installed something you did not want? `npx skills list` shows what is there and `npx skills remove` takes it back out.
 
 Then, in your agent, type the skill you need:
 
