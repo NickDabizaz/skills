@@ -1,0 +1,5 @@
+interface:
+  display_name: "Prototype"
+  short_description: "HTML options or one refined design for a page"
+policy:
+  allow_implicit_invocation: false

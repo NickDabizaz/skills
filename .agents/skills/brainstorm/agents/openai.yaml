@@ -1,0 +1,5 @@
+interface:
+  display_name: "Brainstorm"
+  short_description: "Widen a raw idea into a direction worth planning"
+policy:
+  allow_implicit_invocation: false

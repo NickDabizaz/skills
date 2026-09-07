@@ -1,0 +1,5 @@
+interface:
+  display_name: "Discuss With Docs"
+  short_description: "Settle intent one question at a time, then write the spec"
+policy:
+  allow_implicit_invocation: false

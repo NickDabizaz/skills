@@ -1,0 +1,3 @@
+interface:
+  display_name: "Review"
+  short_description: "Check a diff against plan, standards, logic and security"

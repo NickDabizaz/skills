@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Project"
+  short_description: "Read existing code, then write CONTEXT.md, DESIGN.md, CLAUDE.md"
+policy:
+  allow_implicit_invocation: false

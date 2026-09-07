@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup New Project"
+  short_description: "Interview, then write CONTEXT.md, DESIGN.md, CLAUDE.md"
+policy:
+  allow_implicit_invocation: false

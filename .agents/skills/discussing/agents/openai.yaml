@@ -1,0 +1,3 @@
+interface:
+  display_name: "Discussing"
+  short_description: "Interview loop behind discuss, discuss-with-docs, setup"

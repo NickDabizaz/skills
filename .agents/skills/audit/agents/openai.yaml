@@ -1,0 +1,5 @@
+interface:
+  display_name: "Audit"
+  short_description: "Report where a codebase can improve, as HTML plus a spec"
+policy:
+  allow_implicit_invocation: false
