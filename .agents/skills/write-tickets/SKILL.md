@@ -1,7 +1,7 @@
 ---
 name: write-tickets
 description: "Split an agreed spec, the findings of investigate, or the findings of audit into tickets: one per unit of work, each with acceptance criteria, a checklist, and what blocks it."
-argument-hint: "[path to .issues/<issue-name>/spec.md]"
+argument-hint: "[path to .issues/<issue-name>/spec.md or report.md]"
 disable-model-invocation: true
 ---
 
@@ -12,7 +12,7 @@ Own projects, plus an audit spec in a legacy repo ([MODES.md](../implementing/MO
 In order:
 
 1. The spec path passed, else the one `.issues/*/spec.md` matching the work. `.issues/audit/spec.md` is the spec `audit` wrote; its findings are the units below.
-2. The report `investigate` produced in this conversation: write it first as `.issues/<issue-name>/spec.md` in the spec format (goal, decisions, plan, criteria, out of scope from the report), then split it as one ticket of type `bug`.
+2. The report path passed, else the one `.issues/*/report.md` matching the work, written by `investigate`: write `spec.md` beside it first, in the spec format (goal, decisions, plan, criteria, out of scope from the report) with the report linked from its goal, then split it below. Its tickets are type `bug`.
 
 Neither: stop and tell the user to run `/discuss-with-docs`, `/investigate`, or `/audit`.
 

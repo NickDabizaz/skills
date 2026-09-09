@@ -23,11 +23,15 @@ Own project ([MODES.md](../implementing/MODES.md)): keep the reproduction as a f
 - Every caller and path that goes through the same cause.
 - Fix plan: steps with done-conditions, acceptance criteria as Given/When/Then, out of scope.
 
+The report lives in the conversation; Route decides whether it is also written. Written, it is Markdown at `.issues/<issue-name>/report.md`, and you name `<issue-name>` from the symptom; ask nothing. A folder of that name already there: reuse it when the report belongs to that work, otherwise extend the slug until the name is free. Legacy: add `.issues/` to `.git/info/exclude` when it is not ignored.
+
 ## Route
 
-One question, recommendation by size:
+One question, two options, discuss-style. The user's time decides; the size of the fix only sets the recommendation.
 
-- **A. Heavy**: several areas, a design decision, or worth tracking. Own project: tell the user to run `/write-tickets`, which turns this report into a bug ticket. Legacy: hand the report to the user for their tracker; `/discuss` settles the fix.
-- **B. Light**: one clear change. Tell the user to run `/implement`; the fix plan above is the plan in the conversation.
+- **Fix it now**: the fix plan above is the plan in the conversation. Tell the user to run `/implement`. Recommended when the fix is one clear change.
+- **Track it for later**: write the report. Own project: tell the user to run `/write-tickets`, which splits it into tickets. Legacy: the report is theirs to paste into their tracker, and `/discuss` settles the fix when they come back. Recommended when the cause spans several areas, carries a design decision, or is worth tracking.
+
+Nothing is written before the answer.
 
 Stop.

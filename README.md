@@ -90,7 +90,7 @@ flowchart TD
 
     BR -->|"ideas.md"| DIS
     DIS -->|"spec.md"| WT["/write-tickets"]
-    INV --> WT
+    INV -->|"report.md"| WT
     AUD -->|"report.html + spec.md"| WT
 
     WT -->|"tickets/"| IMP["/implement<br/>/implement-all"]
@@ -210,11 +210,12 @@ Before the first change, `/implement` asks how this run should be verified: lint
 
 ```mermaid
 flowchart LR
-    A["/investigate"] --> B(["reproduction"]) --> C(["proven cause"]) --> D{"How big?"}
-    D -->|"Heavy"| E["/write-tickets"]
-    D -->|"One clear change"| F["/implement"]
+    A["/investigate"] --> B(["reproduction"]) --> C(["proven cause"]) --> D{"Time to fix it now?"}
+    D -->|"Yes"| F["/implement"]
+    D -->|"Later"| G(["report.md"]) --> E["/write-tickets"]
     style B fill:#161b22,color:#c9d1d9,stroke:#30363d
     style C fill:#161b22,color:#c9d1d9,stroke:#30363d
+    style G fill:#161b22,color:#c9d1d9,stroke:#30363d
     style D fill:#0d1117,color:#fff,stroke:#30363d
 ```
 
@@ -224,7 +225,7 @@ flowchart LR
 
 It reproduces the bug on demand first — a test, a script, a command. Then it traces from the symptom to the line that causes it. **A hypothesis counts as confirmed only when changing that one thing changes the symptom**; every candidate it rules out is reported with the reason.
 
-It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan — then it routes by size.
+It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan — then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.issues/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder goes when the last ticket closes.
 
 ---
 
@@ -271,6 +272,7 @@ Each piece of work is one folder that disappears when its last ticket is done.
 .issues/
   subscription-tracker/
     ideas.md                      written by /brainstorm
+    report.md                     written by /investigate
     spec.md                       written by /discuss-with-docs
     tickets/
       01-subscription-model.md    written by /write-tickets
