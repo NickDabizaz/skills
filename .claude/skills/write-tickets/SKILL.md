@@ -5,7 +5,7 @@ argument-hint: "[path to .issues/<issue-name>/spec.md or report.md]"
 disable-model-invocation: true
 ---
 
-Own projects, plus an audit spec in a legacy repo ([MODES.md](../implementing/MODES.md)). Any other spec in a legacy repo: stop, tickets there come from the user's tracker.
+Own projects, plus an audit or research spec in a legacy repo ([MODES.md](../implementing/MODES.md)). Any other spec in a legacy repo: stop, tickets there come from the user's tracker.
 
 ## Input
 
@@ -13,8 +13,9 @@ In order:
 
 1. The spec path passed, else the one `.issues/*/spec.md` matching the work. `.issues/audit/spec.md` is the spec `audit` wrote; its findings are the units below.
 2. The report path passed, else the one `.issues/*/report.md` matching the work, written by `investigate`: write `spec.md` beside it first, in the spec format (goal, decisions, plan, criteria, out of scope from the report) with the report linked from its goal, then split it below. Its tickets are type `bug`.
+3. The research path passed, else the one `.issues/*/research.md` matching the work, written by `research` ([RESEARCH-FORMAT.md](../research/RESEARCH-FORMAT.md)): treat it as 2 treats the report, linked from the spec's goal. Its tickets are type `feature` when the research chose a technology, `bug` when it chased a problem.
 
-Neither: stop and tell the user to run `/discuss-with-docs`, `/investigate`, or `/audit`.
+None: stop and tell the user to run `/discuss-with-docs`, `/investigate`, `/research`, or `/audit`.
 
 ## Split
 
@@ -27,7 +28,7 @@ Present the split as a list (id, title, type, blocked-by) and ask which to write
 
 ## Write
 
-Backend as `CONTEXT.md` says; without `CONTEXT.md` (audit spec in a legacy repo) ask one question, local or github, and with local add `.issues/` to `.git/info/exclude` when it is not ignored. Body per [TICKET-FORMAT.md](TICKET-FORMAT.md):
+Backend as `CONTEXT.md` says; without `CONTEXT.md` (an audit or research spec in a legacy repo) ask one question, local or github, and with local add `.issues/` to `.git/info/exclude` when it is not ignored. Body per [TICKET-FORMAT.md](TICKET-FORMAT.md):
 
 - **local**: one file `.issues/<issue-name>/tickets/<nn>-<slug>.md` per ticket, beside the spec.
 - **github**: `gh issue create` per ticket, title from the ticket, labels `type` and `issue:<issue-name>`, the ticket body as the issue body. The issue number becomes the id; rewrite `blocked-by` with the numbers once all issues exist. The spec folder stays as the local reference.

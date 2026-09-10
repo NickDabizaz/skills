@@ -13,7 +13,7 @@ Read what the user wrote, `CLAUDE.md` / `AGENTS.md` and `CONTEXT.md` where prese
 
 ## Find the cause
 
-Trace from the symptom to the line that produces it: read the path, add logs or asserts, bisect inputs or commits. A hypothesis is confirmed only when changing that one thing changes the symptom; candidates ruled out are kept with the reason. Done when one cause is confirmed by evidence, not by plausibility.
+Trace from the symptom to the line that produces it: read the path, add logs or asserts, bisect inputs or commits. A hypothesis is confirmed only when changing that one thing changes the symptom; candidates ruled out are kept with the reason. Done when one cause is confirmed by evidence, not by plausibility. Every candidate ruled out and none confirmed: the evidence inside this repo is spent, so tell the user to run `/research` and stop.
 
 Own project ([MODES.md](../implementing/MODES.md)): keep the reproduction as a failing test that names the cause. It is the first acceptance test of the fix.
 

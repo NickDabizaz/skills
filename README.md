@@ -4,11 +4,11 @@
 
 **A workflow for coding agents that asks before it builds.**
 
-Eighteen skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
+Nineteen skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
 
 [![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
-[![Skills](https://img.shields.io/badge/skills-18-blue?style=flat-square)](#skill-reference)
+[![Skills](https://img.shields.io/badge/skills-19-blue?style=flat-square)](#skill-reference)
 
 ```bash
 npx skills add NickDabizaz/skills
@@ -71,7 +71,7 @@ npx skills add NickDabizaz/skills -g
 
 ## The system
 
-Four ways in. One chain out. Every arrow is a hand-off the skill performs for you.
+Five ways in. One chain out. Every arrow is a hand-off the skill performs for you.
 
 ```mermaid
 flowchart TD
@@ -81,20 +81,26 @@ flowchart TD
         E2["A change you<br/>already want"]
         E3["A bug"]
         E4["A codebase that<br/>needs work"]
+        E5["A question the repo<br/>cannot answer"]
     end
 
     E1 --> BR["/brainstorm<br/>widen"]
     E2 --> DIS["/discuss<br/>/discuss-with-docs<br/>narrow"]
     E3 --> INV["/investigate<br/>prove the cause"]
     E4 --> AUD["/audit<br/>find the work"]
+    E5 --> RES["/research<br/>gather the facts"]
 
     BR -->|"ideas.md"| DIS
     DIS -->|"spec.md"| WT["/write-tickets"]
     INV -->|"report.md"| WT
     AUD -->|"report.html + spec.md"| WT
+    RES -->|"research.md"| DIS
+    RES -->|"research.md"| WT
+    INV -.->|"out of leads"| RES
 
     WT -->|"tickets/"| IMP["/implement<br/>/implement-all"]
     INV -.->|"small fix"| IMP
+    RES -.->|"small change"| IMP
 
     IMP --> REV["review<br/>Spec · Standards · Logic · UI/UX"]
     REV -->|"findings"| IMP
@@ -103,6 +109,7 @@ flowchart TD
     style BR fill:#1f6feb,color:#fff,stroke:none
     style DIS fill:#1f6feb,color:#fff,stroke:none
     style INV fill:#1f6feb,color:#fff,stroke:none
+    style RES fill:#1f6feb,color:#fff,stroke:none
     style AUD fill:#1f6feb,color:#fff,stroke:none
     style WT fill:#8250df,color:#fff,stroke:none
     style IMP fill:#8250df,color:#fff,stroke:none
@@ -123,7 +130,9 @@ flowchart TD
     START -->|"Only a hunch"| BR["/brainstorm"]
     START -->|"Something is broken"| INV["/investigate"]
     START -->|"The code needs work"| AUD["/audit"]
+    START -->|"The answer is<br/>outside my code"| RES["/research"]
     START -->|"A change I want"| Q2{"Can I picture<br/>the screen?"}
+    INV -.->|"Still unexplained"| RES
 
     Q2 -->|"No"| PRO["/prototype"]
     Q2 -->|"Yes"| Q3{"Will it span<br/>sessions?"}
@@ -249,6 +258,37 @@ A pattern repeated across five files is one finding with five locations, not fiv
 
 ---
 
+### 5 · The answer is not in your own code
+
+```mermaid
+flowchart LR
+    A["/research"] --> B(["scout the outside"]) --> C(["candidates — you pick"]) --> D(["deep dive + one real spike"]) --> E(["research.md"])
+    E --> F{"Still a choice<br/>to make?"}
+    F -->|"Yes"| G["/discuss-with-docs"]
+    F -->|"No"| H["/write-tickets"]
+    style B fill:#161b22,color:#c9d1d9,stroke:#30363d
+    style C fill:#161b22,color:#c9d1d9,stroke:#30363d
+    style D fill:#161b22,color:#c9d1d9,stroke:#30363d
+    style E fill:#161b22,color:#c9d1d9,stroke:#30363d
+    style F fill:#0d1117,color:#fff,stroke:#30363d
+```
+
+Two situations, one skill: a technology you are weighing up, and a bug that survived `/investigate`.
+
+```
+/research  should we move the reporting queries from Prisma to Drizzle
+```
+
+Wave one is a **scout** — agents in parallel on the official docs and their version matrix, on the source repo's issues and changelog, on the community, and one on your own codebase for fit. What comes back is a short candidate list, and nothing goes deeper until you say which ones are worth it.
+
+Wave two is a **deep dive**, one agent per candidate you kept. Every claim carries its source, the version it applies to, and its date, checked against the versions your project actually pins.
+
+Then the part that separates this from reading blog posts: the one claim the whole recommendation rests on gets a **throwaway spike** — in a temp folder outside your repo, actually run, its output recorded, the folder deleted afterwards. A claim that cannot be proved that way is marked unverified with the reason, never quietly dropped.
+
+You are left with `.issues/<issue-name>/research.md`, and it names its own next step: `/discuss-with-docs` while a choice is still yours to make, `/write-tickets` when the findings are settled work, `/implement` when it turned out to be one small change.
+
+---
+
 ## The two modes
 
 Whether a repo has a `CONTEXT.md` at its root decides how every skill behaves.
@@ -273,6 +313,7 @@ Each piece of work is one folder that disappears when its last ticket is done.
   subscription-tracker/
     ideas.md                      written by /brainstorm
     report.md                     written by /investigate
+    research.md                   written by /research
     spec.md                       written by /discuss-with-docs
     tickets/
       01-subscription-model.md    written by /write-tickets
@@ -298,6 +339,7 @@ Each piece of work is one folder that disappears when its last ticket is done.
 | [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. |
 | [`/prototype`](.claude/skills/prototype/SKILL.md) | Clickable self-contained HTML: three options to choose from, or one refined page. |
 | [`/investigate`](.claude/skills/investigate/SKILL.md) | Prove a bug's root cause with evidence, then route the fix. |
+| [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
 | [`/audit`](.claude/skills/audit/SKILL.md) | Report where a codebase can improve, as HTML plus a spec. |
 | [`/write-tickets`](.claude/skills/write-tickets/SKILL.md) | Split a spec into tickets with criteria, checklist, and blockers — local files or GitHub Issues. |
 | [`/implement`](.claude/skills/implement/SKILL.md) | Build one ticket or one plan on the current branch, then hand off to review. |

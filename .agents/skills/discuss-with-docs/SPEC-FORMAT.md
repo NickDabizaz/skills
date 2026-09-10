@@ -1,6 +1,6 @@
 # Spec format
 
-Path: `.issues/<issue-name>/spec.md`; its tickets sit in `.issues/<issue-name>/tickets/`. Discuss-with-docs writes it once the plan is confirmed, audit writes one from its findings, write-tickets writes one from an investigate report and splits any of them into tickets in an own project; implement builds from it or from its tickets; review checks the diff against it.
+Path: `.issues/<issue-name>/spec.md`; its tickets sit in `.issues/<issue-name>/tickets/`. Discuss-with-docs writes it once the plan is confirmed, audit writes one from its findings, write-tickets writes one from an investigate or research report and splits any of them into tickets in an own project; implement builds from it or from its tickets; review checks the diff against it.
 
 ```md
 # <Title>
@@ -35,7 +35,7 @@ Rules:
 
 - One decision per settled question, each with its reason. A decision without a reason cannot be revisited later.
 - No code snippets and no file paths, unless the decision is about that file or the path is the investigate report the goal links. Both go stale fast.
-- A spec written from an `investigate` report ends its goal with a link to the `report.md` beside it. The evidence, the ruled-out candidates and the reproduction steps stay in the report; the spec never copies them.
+- A spec written from an `investigate` or `research` report ends its goal with a link to the `report.md` or `research.md` beside it. The evidence, the ruled-out candidates, the reproduction steps and the sources stay there; the spec never copies them.
 - UX flow only when the work touches UI; otherwise the section is absent. Each state it names is also an acceptance criterion.
 - Acceptance criteria are checkable by someone who did not attend the discussion, and each one becomes a test in an own project: one state, one action, one observable result per line.
 - There is no "Open questions" section. An open question means discuss is not done.

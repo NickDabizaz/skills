@@ -1,6 +1,6 @@
 # CONTEXT.md format
 
-Path: repo root, gitignored. Its presence marks the repo as an own project ([MODES.md](../implementing/MODES.md)). `setup-new-project` or `setup-project` writes it; `discuss`, `implement`, `review`, `write-tickets`, `investigate`, and `audit` read it. Design rules live beside it in `DESIGN.md` ([DESIGN-FORMAT.md](DESIGN-FORMAT.md)).
+Path: repo root, gitignored. Its presence marks the repo as an own project ([MODES.md](../implementing/MODES.md)). `setup-new-project` or `setup-project` writes it; `discuss`, `implement`, `review`, `write-tickets`, `investigate`, `research`, and `audit` read it. Design rules live beside it in `DESIGN.md` ([DESIGN-FORMAT.md](DESIGN-FORMAT.md)).
 
 ```md
 # <Project>

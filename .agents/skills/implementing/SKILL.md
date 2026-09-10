@@ -11,11 +11,11 @@ In order:
 
 1. The ticket passed: a `.issues/<issue-name>/tickets/` path or a GitHub issue number, in the format of [TICKET-FORMAT.md](../write-tickets/TICKET-FORMAT.md). Read the `spec.md` beside it (GitHub: the folder its `issue:` label names) too.
 2. A spec path passed, or the `.issues/<issue-name>/spec.md` the user named. Own project: a spec is built through its tickets; stop and tell the user to run `/write-tickets`.
-3. A plan agreed in this conversation by `discuss`, `discuss-with-docs`, or `investigate`.
+3. A plan agreed in this conversation by `discuss`, `discuss-with-docs`, `investigate`, or `research`.
 
 Legacy: a `.issues/audit/tickets/` path or an issue labelled `issue:audit` is a ticket like any other.
 
-None: stop and tell the user to run `/discuss`, `/discuss-with-docs`, or `/investigate`. There is no plan to invent.
+None: stop and tell the user to run `/discuss`, `/discuss-with-docs`, `/investigate`, or `/research`. There is no plan to invent.
 
 ## Before writing code
 

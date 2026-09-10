@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research"
+  short_description: "Answer what the repo cannot, with proof"
+policy:
+  allow_implicit_invocation: false
