@@ -24,7 +24,7 @@ Route the user to the one skill that fits their situation. Point, never fire: th
 | A spec exists in an own project, or an audit spec anywhere, and should become tickets | `/write-tickets` | One ticket per unit of work, with criteria, checklist, and what blocks it; you pick all or some; beside the spec or as GitHub Issues. |
 | One ticket (`.issues/<issue-name>/tickets/<nn>-<slug>.md` or an issue number), or a plan in the conversation, should now be built | `/implement` | Builds it on the current branch with the mode's verification, and hands off to review by itself. |
 | Every open ticket of a spec should be built | `/implement-all` | Parallel where nothing blocks, one branch each, merged into a target branch, reviewed as a whole against the spec. |
-| A merge or rebase stopped on conflicts | `resolve-conflicts` | Resolves by the spec and both tickets; asks when neither decides. Called by implement-all, or by you. |
+| A merge or rebase stopped on conflicts | `resolve-merge-conflicts` | Resolves by the spec and both tickets; asks when neither decides. Called by implement-all, or by you. |
 | Code has changed and should be checked against the plan, the codebase's conventions, and for bugs or security holes | `review` | Reports on Spec, Standards, Logic & Security; touches nothing. |
 | `DESIGN.md` should be written or completed for an own project | `designing` | Interviews a new project or extracts tokens, patterns, and components from existing code. Called by setup-new-project and discuss. |
 | Writing or editing a skill, `CLAUDE.md`, `AGENTS.md`, `CONTEXT.md`, or `DESIGN.md` | `writing-for-agents` | The pruning and structure rules every document here follows. |

@@ -353,7 +353,7 @@ Each piece of work is one folder that disappears when its last ticket is done.
 | [`discussing`](.claude/skills/discussing/SKILL.md) | The shared interview loop behind every discuss entry point. |
 | [`implementing`](.claude/skills/implementing/SKILL.md) | The shared build loop behind `/implement` and `/implement-all`. |
 | [`designing`](.claude/skills/designing/SKILL.md) | Write or complete `DESIGN.md`, by interview or by extraction from existing code. |
-| [`resolve-conflicts`](.claude/skills/resolve-conflicts/SKILL.md) | Resolve merge conflicts using the spec and both tickets as the reference. |
+| [`resolve-merge-conflicts`](.claude/skills/resolve-merge-conflicts/SKILL.md) | Resolve merge conflicts using the spec and both tickets as the reference. |
 | [`writing-for-agents`](.claude/skills/writing-for-agents/SKILL.md) | The rules every document here follows. Use it to write your own. |
 
 ---
@@ -399,7 +399,7 @@ Call `writing-for-agents` — it carries the naming rules, the layout, and the p
 
 - A core skill is one bare verb (`discuss`); a variant of it adds a suffix (`discuss-with-docs`).
 - A loop that several skills share is a gerund (`discussing`).
-- A supporting skill is verb plus object (`resolve-conflicts`).
+- A supporting skill is verb plus object (`resolve-merge-conflicts`).
 - Every skill ships an `agents/openai.yaml` so it works outside Claude Code.
 - Every new skill gets a row in `ask-me` and in this README, in the same change.
 

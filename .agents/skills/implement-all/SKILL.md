@@ -19,7 +19,7 @@ Until no open ticket remains:
 
 1. **Ready set**: open tickets whose blockers are all `done`.
 2. **Build**: each ready ticket on its own branch `ticket/<id>-<slug>` cut from the target, by calling the Skill tool with "implementing" on that ticket, ending with one commit when its review passes. If the harness offers sub-agents with worktree isolation (Claude Code: the Agent tool with `isolation: "worktree"`), run the ready set in parallel, one agent per ticket, each told to do exactly that and that this run owns the cleanup. A worktree lacks the gitignored files: copy `CONTEXT.md`, `CLAUDE.md` / `AGENTS.md`, and `.issues/` into it before the build, and copy the ticket file (boxes, status) back after. Otherwise build them one after another in this checkout. A build that stops on a question brings the question to the user, then resumes.
-3. **Merge** finished branches into the target in ticket-id order. A conflict: call the Skill tool with "resolve-conflicts", then continue.
+3. **Merge** finished branches into the target in ticket-id order. A conflict: call the Skill tool with "resolve-merge-conflicts", then continue.
 4. Recompute the ready set.
 
 ## Finish

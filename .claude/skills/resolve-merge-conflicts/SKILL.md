@@ -1,5 +1,5 @@
 ---
-name: resolve-conflicts
+name: resolve-merge-conflicts
 description: "Resolve merge conflicts with the spec and the tickets on both sides as the reference. Use when a merge or rebase stops on conflicts, from implement-all or on the user's request."
 ---
 
