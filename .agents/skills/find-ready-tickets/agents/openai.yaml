@@ -1,0 +1,5 @@
+interface:
+  display_name: "Find Ready Tickets"
+  short_description: "Scan tickets for ones ready to build now"
+policy:
+  allow_implicit_invocation: false

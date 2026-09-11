@@ -4,11 +4,11 @@
 
 **A workflow for coding agents that asks before it builds.**
 
-Twenty skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
+Twenty-one skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
 
 [![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
-[![Skills](https://img.shields.io/badge/skills-20-blue?style=flat-square)](#skill-reference)
+[![Skills](https://img.shields.io/badge/skills-21-blue?style=flat-square)](#skill-reference)
 
 ```bash
 npx skills add NickDabizaz/skills
@@ -351,6 +351,7 @@ Each piece of work is one folder that disappears when its last ticket is done.
 | [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
 | [`/audit`](.claude/skills/audit/SKILL.md) | Report where a codebase can improve, as HTML plus a spec. |
 | [`/write-tickets`](.claude/skills/write-tickets/SKILL.md) | Split a spec into tickets with criteria, checklist, and blockers — local files or GitHub Issues. |
+| [`/find-ready-tickets`](.claude/skills/find-ready-tickets/SKILL.md) | Scan every spec's tickets for the ones ready to build now, without opening each one, and get the exact next command. |
 | [`/implement`](.claude/skills/implement/SKILL.md) | Build one ticket or one plan on the current branch, then hand off to review. |
 | [`/implement-all`](.claude/skills/implement-all/SKILL.md) | Build every open ticket in parallel, one branch each, merged and reviewed as a whole. |
 
