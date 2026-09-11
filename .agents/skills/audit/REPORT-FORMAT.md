@@ -1,6 +1,6 @@
 # Audit report format
 
-Path: `.issues/audit/report.html`. `audit` writes it; the user reads it. One self-contained file: CSS and JS inline, no build step, no network dependency, opens by double-click, readable at phone and desktop widths.
+Path: `.workspace/audit/report.html`. `audit` writes it; the user reads it. One self-contained file: CSS and JS inline, no build step, no network dependency, opens by double-click, readable at phone and desktop widths.
 
 ## Language
 

@@ -1,6 +1,6 @@
 # Ticket format
 
-Local backend: `.issues/<issue-name>/tickets/<nn>-<slug>.md`, beside the spec, one file per ticket, this whole document. GitHub backend: the body below the frontmatter is the issue body; the issue number is `id`, the labels are `type`, `issue:<issue-name>`, and, while being built, `in-progress`; `status` is `done` when the issue is closed, `todo` otherwise.
+Local backend: `.workspace/<issue-name>/tickets/<nn>-<slug>.md`, beside the spec, one file per ticket, this whole document. GitHub backend: the body below the frontmatter is the issue body; the issue number is `id`, the labels are `type`, `issue:<issue-name>`, and, while being built, `in-progress`; `status` is `done` when the issue is closed, `todo` otherwise.
 
 ```md
 ---

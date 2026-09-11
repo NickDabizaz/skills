@@ -12,7 +12,7 @@ Produces `DESIGN.md` at the repo root in the format of [DESIGN-FORMAT.md](../set
 
 ## Interview
 
-Ask in the [discussing](../discussing/SKILL.md) format, one question per turn, without calling that skill: the caller's loop is already running. The content being settled is DESIGN-FORMAT.md; decisions the user already stated or the repo already shows are not asked:
+Ask in the [discussing](../discussing/SKILL.md) format, one question per turn, without calling that skill: the caller's loop is already running. The content being settled is DESIGN-FORMAT.md; decisions the user already stated, `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)) already answers, or the repo already shows are not asked:
 
 - Who the users are and what they come to do.
 - Tone: the one or two words the interface should feel like, and a product the user points at as a reference.

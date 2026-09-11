@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: "Widen a raw idea into three concrete directions a round until one is clear enough to plan, and write them to .issues/<issue-name>/ideas.md."
+description: "Widen a raw idea into three concrete directions a round until one is clear enough to plan, and write them to .workspace/<issue-name>/ideas.md."
 argument-hint: "<the raw idea, however vague>"
 disable-model-invocation: true
 ---
@@ -34,7 +34,7 @@ A direction is ready when three fields are filled: who it is for, the problem it
 
 ## Write
 
-Folder `.issues/<issue-name>/ideas.md`, `<issue-name>` a short kebab-case name for the chosen direction, or for the idea itself when none was chosen, named at the end because at the start there is none. Create the folder if it is missing; a file there already: read it before the first round and continue from it instead of starting over. This file is the only thing written to disk, and `spec.md` and `tickets/` land beside it later. Legacy: when `.issues/` is not ignored, add it to `.git/info/exclude`, which stays local, so nothing reaches the remote.
+Folder `.workspace/<issue-name>/ideas.md`, `<issue-name>` a short kebab-case name for the chosen direction, or for the idea itself when none was chosen, named at the end because at the start there is none. Create the folder if it is missing; a file there already: read it before the first round and continue from it instead of starting over. This file is the only thing written to disk, and `spec.md` and `tickets/` land beside it later. Legacy: when `.workspace/` is not ignored, add it to `.git/info/exclude`, which stays local, so nothing reaches the remote.
 
 1. The idea as the user gave it.
 2. Every idea offered, by round, with its four fields.

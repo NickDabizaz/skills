@@ -23,7 +23,7 @@ Each finding gets an id (`A-01`, `A-02`, ...), a theme, an impact and an effort 
 
 ## Write
 
-Folder `.issues/audit/`. Files there already: read, then overwrite; ids restart at `A-01`. Legacy: when `.issues/` is not ignored, add it to `.git/info/exclude`.
+Folder `.workspace/audit/`. Files there already: read, then overwrite; ids restart at `A-01`. Legacy: when `.workspace/` is not ignored, add it to `.git/info/exclude`.
 
 1. `report.html` per [REPORT-FORMAT.md](REPORT-FORMAT.md), in the user's language.
 2. `spec.md` per [SPEC-FORMAT.md](../discuss-with-docs/SPEC-FORMAT.md): goal is the audit's scope; one decision per theme naming the target state; one plan step per finding, its done-condition the proposed state, the finding's files named (the step is about them); one acceptance criterion per finding; out of scope lists what was not audited. Every id in the report is in the spec.
@@ -32,4 +32,4 @@ If the harness can show HTML to the user directly (Claude Code: the Artifact too
 
 ## Done when
 
-Both files exist and every finding in the report is one step and one criterion in the spec. Then one question, discuss-style: run `/write-tickets .issues/audit/spec.md` now (recommended when the user came to improve, not only to look), or read the report first. Stop.
+Both files exist and every finding in the report is one step and one criterion in the spec. Then one question, discuss-style: run `/write-tickets .workspace/audit/spec.md` now (recommended when the user came to improve, not only to look), or read the report first. Stop.

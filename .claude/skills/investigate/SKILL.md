@@ -23,7 +23,7 @@ Own project ([MODES.md](../implementing/MODES.md)): keep the reproduction as a f
 - Every caller and path that goes through the same cause.
 - Fix plan: steps with done-conditions, acceptance criteria as Given/When/Then, out of scope.
 
-The report lives in the conversation; Route decides whether it is also written. Written, it is Markdown at `.issues/<issue-name>/report.md`, and you name `<issue-name>` from the symptom; ask nothing. A folder of that name already there: reuse it when the report belongs to that work, otherwise extend the slug until the name is free. Legacy: add `.issues/` to `.git/info/exclude` when it is not ignored.
+The report lives in the conversation; Route decides whether it is also written. Written, it is Markdown at `.workspace/<issue-name>/report.md`, and you name `<issue-name>` from the symptom; ask nothing. A folder of that name already there: reuse it when the report belongs to that work, otherwise extend the slug until the name is free. Legacy: add `.workspace/` to `.git/info/exclude` when it is not ignored.
 
 ## Route
 

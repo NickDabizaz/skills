@@ -1,6 +1,6 @@
 # Research format
 
-Path: `.issues/<issue-name>/research.md`. `research` writes it; the user reads it. `discuss-with-docs` turns it into `spec.md` ([SPEC-FORMAT.md](../discuss-with-docs/SPEC-FORMAT.md)), and `write-tickets` splits it, reading the mode line for the ticket type.
+Path: `.workspace/<issue-name>/research.md`. `research` writes it; the user reads it. `discuss-with-docs` turns it into `spec.md` ([SPEC-FORMAT.md](../discuss-with-docs/SPEC-FORMAT.md)), and `write-tickets` splits it, reading the mode line for the ticket type.
 
 ```md
 # <The question, as the user asked it>

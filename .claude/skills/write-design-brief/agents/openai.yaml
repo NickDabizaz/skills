@@ -1,0 +1,5 @@
+interface:
+  display_name: "Write Design Brief"
+  short_description: "Interview pages, features, components, typography"
+policy:
+  allow_implicit_invocation: false

@@ -4,11 +4,11 @@
 
 **A workflow for coding agents that asks before it builds.**
 
-Nineteen skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
+Twenty skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
 
 [![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
-[![Skills](https://img.shields.io/badge/skills-19-blue?style=flat-square)](#skill-reference)
+[![Skills](https://img.shields.io/badge/skills-20-blue?style=flat-square)](#skill-reference)
 
 ```bash
 npx skills add NickDabizaz/skills
@@ -179,9 +179,9 @@ You react. Every round closes with one question: *go deeper on this one, or spre
 Then the requirements get settled, cut into tickets, and built:
 
 ```
-/discuss-with-docs  .issues/subscription-tracker/ideas.md
-/write-tickets      .issues/subscription-tracker/spec.md
-/implement-all      .issues/subscription-tracker/spec.md
+/discuss-with-docs  .workspace/subscription-tracker/ideas.md
+/write-tickets      .workspace/subscription-tracker/spec.md
+/implement-all      .workspace/subscription-tracker/spec.md
 ```
 
 `/implement-all` reads the dependency graph, builds unblocked tickets in parallel on their own branches, resolves conflicts against the spec, merges into your target branch, and reviews the whole diff at the end.
@@ -234,7 +234,7 @@ flowchart LR
 
 It reproduces the bug on demand first — a test, a script, a command. Then it traces from the symptom to the line that causes it. **A hypothesis counts as confirmed only when changing that one thing changes the symptom**; every candidate it rules out is reported with the reason.
 
-It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan — then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.issues/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder goes when the last ticket closes.
+It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan — then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.workspace/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder goes when the last ticket closes.
 
 ---
 
@@ -285,7 +285,7 @@ Wave two is a **deep dive**, one agent per candidate you kept. Every claim carri
 
 Then the part that separates this from reading blog posts: the one claim the whole recommendation rests on gets a **throwaway spike** — in a temp folder outside your repo, actually run, its output recorded, the folder deleted afterwards. A claim that cannot be proved that way is marked unverified with the reason, never quietly dropped.
 
-You are left with `.issues/<issue-name>/research.md`, and it names its own next step: `/discuss-with-docs` while a choice is still yours to make, `/write-tickets` when the findings are settled work, `/implement` when it turned out to be one small change.
+You are left with `.workspace/<issue-name>/research.md`, and it names its own next step: `/discuss-with-docs` while a choice is still yours to make, `/write-tickets` when the findings are settled work, `/implement` when it turned out to be one small change.
 
 ---
 
@@ -296,7 +296,7 @@ Whether a repo has a `CONTEXT.md` at its root decides how every skill behaves.
 |  | **Own project**<br/>`CONTEXT.md` present | **Legacy**<br/>no `CONTEXT.md` |
 | --- | --- | --- |
 | **Work comes from** | A spec, split into tickets | A ticket you paste from your tracker |
-| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.issues/` — all gitignored | None, beyond `.issues/` when you ask for it — kept out of the remote via `.git/info/exclude` |
+| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.workspace/` — all gitignored | None, beyond `.workspace/` when you ask for it — kept out of the remote via `.git/info/exclude` |
 | **Tests** | An acceptance test per criterion, written before the code, red-green per step | Whatever you choose at the start of `/implement` |
 | **Design rules** | `DESIGN.md` | The components already in the code |
 
@@ -309,7 +309,10 @@ Run `/setup-new-project` (empty repo) or `/setup-project` (existing code) once t
 Each piece of work is one folder that disappears when its last ticket is done.
 
 ```
-.issues/
+.workspace/
+  PRD.md               written by /setup-new-project's PRD-driven kickoff
+  DESIGN_BRIEF.md      written by /write-design-brief
+  API_REQUIREMENT.md   written by /discuss-with-docs
   subscription-tracker/
     ideas.md                      written by /brainstorm
     report.md                     written by /investigate
@@ -321,7 +324,12 @@ Each piece of work is one folder that disappears when its last ticket is done.
       03-renewal-reminders.md
 ```
 
-`.issues/` is gitignored in an own project, and kept out of the remote via `.git/info/exclude` in a legacy repo. Nothing here ever reaches a pull request.
+`PRD.md`, `DESIGN_BRIEF.md`, and `API_REQUIREMENT.md` sit directly under `.workspace/`, not inside one issue's folder: read once by the chain, deleted together when the kickoff spec's tickets are all done.
+
+`.workspace/` is gitignored in an own project, and kept out of the remote via `.git/info/exclude` in a legacy repo. Nothing here ever reaches a pull request.
+
+> [!NOTE]
+> This folder was named `.issues/` before. If you have one from an earlier version of this set, rename it to `.workspace/` by hand.
 
 ---
 
@@ -332,11 +340,12 @@ Each piece of work is one folder that disappears when its last ticket is done.
 | Skill | Job |
 | --- | --- |
 | [`/ask-me`](.claude/skills/ask-me/SKILL.md) | Describe your situation, get pointed at the right skill with the reason. |
-| [`/setup-new-project`](.claude/skills/setup-new-project/SKILL.md) | Interview once; write `CONTEXT.md`, `DESIGN.md`, and the instruction file for an empty repo. |
+| [`/setup-new-project`](.claude/skills/setup-new-project/SKILL.md) | Interview once; write `CONTEXT.md`, `DESIGN.md`, and the instruction file for an empty repo. Offers a PRD-driven kickoff first for a brand-new product. |
 | [`/setup-project`](.claude/skills/setup-project/SKILL.md) | The same documents for a repo that already has code, read from the code first. |
 | [`/brainstorm`](.claude/skills/brainstorm/SKILL.md) | Widen a raw idea: three directions a round until one is clear enough to plan. |
 | [`/discuss`](.claude/skills/discuss/SKILL.md) | Settle a plan one question at a time. Stays in the conversation. |
-| [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. |
+| [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. When a PRD-driven kickoff is open, offers an API requirement step first and covers its full scope. |
+| [`/write-design-brief`](.claude/skills/write-design-brief/SKILL.md) | Interview a PRD's features into pages, components, and typography direction — for `/prototype` or an outsourced UI/UX team. |
 | [`/prototype`](.claude/skills/prototype/SKILL.md) | Clickable self-contained HTML: three options to choose from, or one refined page. |
 | [`/investigate`](.claude/skills/investigate/SKILL.md) | Prove a bug's root cause with evidence, then route the fix. |
 | [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
@@ -384,7 +393,7 @@ Six rules run through every skill. They are what make this feel different from p
 .agents/skills/<name>/                       the same tree, for Codex and others
 ```
 
-Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
+Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
 
 **Manual install** — if you would rather not use the CLI:
 

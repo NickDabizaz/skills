@@ -9,11 +9,11 @@ Build the plan exactly as agreed. The plan is the contract: nothing is added, dr
 
 In order:
 
-1. The ticket passed: a `.issues/<issue-name>/tickets/` path or a GitHub issue number, in the format of [TICKET-FORMAT.md](../write-tickets/TICKET-FORMAT.md). Read the `spec.md` beside it (GitHub: the folder its `issue:` label names) too.
-2. A spec path passed, or the `.issues/<issue-name>/spec.md` the user named. Own project: a spec is built through its tickets; stop and tell the user to run `/write-tickets`.
+1. The ticket passed: a `.workspace/<issue-name>/tickets/` path or a GitHub issue number, in the format of [TICKET-FORMAT.md](../write-tickets/TICKET-FORMAT.md). Read the `spec.md` beside it (GitHub: the folder its `issue:` label names) too.
+2. A spec path passed, or the `.workspace/<issue-name>/spec.md` the user named. Own project: a spec is built through its tickets; stop and tell the user to run `/write-tickets`.
 3. A plan agreed in this conversation by `discuss`, `discuss-with-docs`, `investigate`, or `research`.
 
-Legacy: a `.issues/audit/tickets/` path or an issue labelled `issue:audit` is a ticket like any other.
+Legacy: a `.workspace/audit/tickets/` path or an issue labelled `issue:audit` is a ticket like any other.
 
 None: stop and tell the user to run `/discuss`, `/discuss-with-docs`, `/investigate`, or `/research`. There is no plan to invent.
 
@@ -45,7 +45,7 @@ When the plan turns out to be wrong or blocked (a step cannot be done as written
 When every step's done-condition holds and verification passes, call the Skill tool with "review", pointing it at the diff, the ticket, and the spec.
 
 - Findings: fix them, then call the Skill tool with "review" again. Three rounds at most; findings still open after the third go to the user as-is.
-- PASS: ticket to `done` (GitHub: close the issue). When it was the spec's last open ticket and no `implement-all` run owns the cleanup, delete `.issues/<issue-name>/` (the ideas, the spec, and its tickets).
+- PASS: ticket to `done` (GitHub: close the issue). When it was the spec's last open ticket and no `implement-all` run owns the cleanup, delete `.workspace/<issue-name>/` (the ideas, the spec, and its tickets); its goal links `.workspace/PRD.md`: delete that, `.workspace/DESIGN_BRIEF.md`, and `.workspace/API_REQUIREMENT.md` too, whichever exist.
 - Report done: what was built, how it was verified, and anything the user should know.
 
 Commit only when the user or the calling skill asks.

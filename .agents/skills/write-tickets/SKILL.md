@@ -1,7 +1,7 @@
 ---
 name: write-tickets
 description: "Split an agreed spec, the findings of investigate, or the findings of audit into tickets: one per unit of work, each with acceptance criteria, a checklist, and what blocks it."
-argument-hint: "[path to .issues/<issue-name>/spec.md or report.md]"
+argument-hint: "[path to .workspace/<issue-name>/spec.md or report.md]"
 disable-model-invocation: true
 ---
 
@@ -11,9 +11,9 @@ Own projects, plus an audit or research spec in a legacy repo ([MODES.md](../imp
 
 In order:
 
-1. The spec path passed, else the one `.issues/*/spec.md` matching the work. `.issues/audit/spec.md` is the spec `audit` wrote; its findings are the units below.
-2. The report path passed, else the one `.issues/*/report.md` matching the work, written by `investigate`: write `spec.md` beside it first, in the spec format (goal, decisions, plan, criteria, out of scope from the report) with the report linked from its goal, then split it below. Its tickets are type `bug`.
-3. The research path passed, else the one `.issues/*/research.md` matching the work, written by `research` ([RESEARCH-FORMAT.md](../research/RESEARCH-FORMAT.md)): treat it as 2 treats the report, linked from the spec's goal. Its tickets are type `feature` when the research chose a technology, `bug` when it chased a problem.
+1. The spec path passed, else the one `.workspace/*/spec.md` matching the work. `.workspace/audit/spec.md` is the spec `audit` wrote; its findings are the units below.
+2. The report path passed, else the one `.workspace/*/report.md` matching the work, written by `investigate`: write `spec.md` beside it first, in the spec format (goal, decisions, plan, criteria, out of scope from the report) with the report linked from its goal, then split it below. Its tickets are type `bug`.
+3. The research path passed, else the one `.workspace/*/research.md` matching the work, written by `research` ([RESEARCH-FORMAT.md](../research/RESEARCH-FORMAT.md)): treat it as 2 treats the report, linked from the spec's goal. Its tickets are type `feature` when the research chose a technology, `bug` when it chased a problem.
 
 None: stop and tell the user to run `/discuss-with-docs`, `/investigate`, `/research`, or `/audit`.
 
@@ -28,13 +28,13 @@ Present the split as a list (id, title, type, blocked-by) and ask which to write
 
 ## Write
 
-Backend as `CONTEXT.md` says; without `CONTEXT.md` (an audit or research spec in a legacy repo) ask one question, local or github, and with local add `.issues/` to `.git/info/exclude` when it is not ignored. Body per [TICKET-FORMAT.md](TICKET-FORMAT.md):
+Backend as `CONTEXT.md` says; without `CONTEXT.md` (an audit or research spec in a legacy repo) ask one question, local or github, and with local add `.workspace/` to `.git/info/exclude` when it is not ignored. Body per [TICKET-FORMAT.md](TICKET-FORMAT.md):
 
-- **local**: one file `.issues/<issue-name>/tickets/<nn>-<slug>.md` per ticket, beside the spec.
+- **local**: one file `.workspace/<issue-name>/tickets/<nn>-<slug>.md` per ticket, beside the spec.
 - **github**: `gh issue create` per ticket, title from the ticket, labels `type` and `issue:<issue-name>`, the ticket body as the issue body. The issue number becomes the id; rewrite `blocked-by` with the numbers once all issues exist. The spec folder stays as the local reference.
 
 Leave the spec in place.
 
 ## Done when
 
-Every chosen unit is one ticket, no `blocked-by` cycle exists, and each ticket is written in the backend. Then tell the user the two ways on: `/implement .issues/<issue-name>/tickets/01-<slug>.md` (or `/implement <issue number>`) for one ticket, `/implement-all .issues/<issue-name>/spec.md` for all of them. Stop.
+Every chosen unit is one ticket, no `blocked-by` cycle exists, and each ticket is written in the backend. Then tell the user the two ways on: `/implement .workspace/<issue-name>/tickets/01-<slug>.md` (or `/implement <issue number>`) for one ticket, `/implement-all .workspace/<issue-name>/spec.md` for all of them. Stop.

@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Answer a question the repo cannot: fan agents out to documentation, source and community, prove the claim the answer rests on with a real spike, and write .issues/<issue-name>/research.md."
+description: "Answer a question the repo cannot: fan agents out to documentation, source and community, prove the claim the answer rests on with a real spike, and write .workspace/<issue-name>/research.md."
 argument-hint: "<the library or technology to weigh up, or the problem you are stuck on>"
 disable-model-invocation: true
 ---
@@ -47,7 +47,7 @@ Done when the claim carries a verdict from its own output or an unverified mark,
 
 ## Write
 
-`.issues/<issue-name>/research.md` per [RESEARCH-FORMAT.md](RESEARCH-FORMAT.md), in the user's language. You name `<issue-name>` from the question; ask nothing. A folder of that name already there: reuse it when the research belongs to that work, otherwise extend the slug until the name is free. This file is the only thing written to disk. Legacy ([MODES.md](../implementing/MODES.md)): add `.issues/` to `.git/info/exclude` when it is not ignored.
+`.workspace/<issue-name>/research.md` per [RESEARCH-FORMAT.md](RESEARCH-FORMAT.md), in the user's language. You name `<issue-name>` from the question; ask nothing. A folder of that name already there: reuse it when the research belongs to that work, otherwise extend the slug until the name is free. This file is the only thing written to disk. Legacy ([MODES.md](../implementing/MODES.md)): add `.workspace/` to `.git/info/exclude` when it is not ignored.
 
 Done when every candidate Scout named is in the file as chosen, shortlisted, or ruled out with its reason.
 

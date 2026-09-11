@@ -21,7 +21,7 @@ Done when every section is filled from evidence or marked unknown.
 
 ## Interview
 
-Call the Skill tool with "discussing". Open with the draft as one message, then ask only what is unknown: purpose and users, invariants the code does not enforce, ticket backend (local `.issues/<issue-name>/tickets/`, or GitHub Issues with `gh` authenticated), instruction file (`CLAUDE.md`, `AGENTS.md`, or both). The next step discussing names once the plan is confirmed: `/audit` to see where the codebase stands, or `/discuss` for the first change.
+Call the Skill tool with "discussing". Open with the draft as one message, then ask only what is unknown: purpose and users, invariants the code does not enforce, ticket backend (local `.workspace/<issue-name>/tickets/`, or GitHub Issues with `gh` authenticated), instruction file (`CLAUDE.md`, `AGENTS.md`, or both). The next step discussing names once the plan is confirmed: `/audit` to see where the codebase stands, or `/discuss` for the first change.
 
 ## Write
 
