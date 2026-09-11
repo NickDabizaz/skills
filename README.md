@@ -4,7 +4,7 @@
 
 **A workflow for coding agents that asks before it builds.**
 
-Twenty-one skills that take you from a vague idea to reviewed, shipped code — one decision at a time.
+Twenty-one skills that take you from a vague idea to reviewed, shipped code, one decision at a time.
 
 [![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
@@ -28,11 +28,11 @@ Works with Claude Code, Codex, Cursor, and every other agent the [`skills`](http
 
 ## Why this exists
 
-Most work with a coding agent fails the same way. You describe a task in one paragraph. The agent quietly guesses at everything you left out. You spend the next hour undoing the guesses.
+You type one paragraph. The agent starts typing back immediately: new files, a renamed function, a migration you didn't ask for. Thirty minutes later you're reading a diff, trying to work out what it decided on your behalf, and undoing half of it.
 
-The problem is not the model. It is that the conversation skipped the part where a good colleague would have asked *"who is this for?"* and *"what should happen when it fails?"* before touching the keyboard.
+Nothing here is broken. The agent did exactly what you said. The problem is everything you *didn't* say: who this is for, what should happen when it fails, whether the old behavior still needs to work. All of that got decided for you, silently, because nobody asked.
 
-This set puts that part back — and then keeps going, through tickets, implementation, and review, without losing the thread.
+A good colleague asks those questions before touching the keyboard. This set is built to do the same. One skill for a vague idea, one for a bug, one for a ticket you already have, and none of them guess through ambiguity, they stall on it instead. Once you've answered, the answer doesn't get lost: it gets carried through tickets, through code, through review, all the way to something shipped.
 
 | Without | With |
 | --- | --- |
@@ -63,7 +63,7 @@ npx skills add NickDabizaz/skills -g
 ```
 
 > [!TIP]
-> **Careful with `--all`.** It expands to `--skill '*' --agent '*' -y` — every skill, **every agent the CLI can detect**, and no prompts. It writes `.claude/`, `.agents/`, `agent/` and a `skills-lock.json` into your folder in one shot. Right for CI, surprising on a laptop. The CLI also goes non-interactive by itself when it detects it is running inside an agent session.
+> **Careful with `--all`.** It expands to `--skill '*' --agent '*' -y`: every skill, **every agent the CLI can detect**, and no prompts. It writes `.claude/`, `.agents/`, `agent/` and a `skills-lock.json` into your folder in one shot. Fine for CI, surprising on a laptop. The CLI also goes non-interactive by itself once it detects it is running inside an agent session.
 >
 > Installed something you did not mean to? `npx skills list` shows what landed and `npx skills remove` takes it back out.
 
@@ -138,8 +138,8 @@ flowchart TD
     Q2 -->|"Yes"| Q3{"Will it span<br/>sessions?"}
 
     PRO --> Q3
-    Q3 -->|"Yes — leave a spec"| DWD["/discuss-with-docs"]
-    Q3 -->|"No — one sitting"| DIS["/discuss"]
+    Q3 -->|"Yes, leave a spec"| DWD["/discuss-with-docs"]
+    Q3 -->|"No, one sitting"| DIS["/discuss"]
 
     style START fill:#0d1117,color:#fff,stroke:#30363d
     style Q2 fill:#0d1117,color:#fff,stroke:#30363d
@@ -166,13 +166,13 @@ flowchart LR
     style F fill:#161b22,color:#c9d1d9,stroke:#30363d
 ```
 
-You want to build *something* around recurring payments, but you cannot yet say what.
+You want to build *something* around recurring payments. You can't yet say what, only that you keep losing track of them.
 
 ```
 /brainstorm  I keep losing track of my subscriptions, feels like there's something here
 ```
 
-`/brainstorm` reads your repo first, then answers with **three concrete directions** — deliberately at different ambition levels, each solving a different problem for a different person. It never opens with questions, because you cannot answer abstract questions at this stage, but you can always react to something concrete.
+`/brainstorm` reads your repo first, then answers with **three concrete directions**: deliberately pitched at different ambition levels, each solving a different problem for a different person. It never opens with questions, because you can't answer an abstract question at this stage, but you can always react to something concrete.
 
 You react. Every round closes with one question: *go deeper on this one, or spread again from a new angle?* Rounds continue until the chosen direction has all three of **who it is for**, **the problem it solves**, and **the smallest version already worth using**.
 
@@ -196,22 +196,22 @@ flowchart LR
     style C fill:#161b22,color:#c9d1d9,stroke:#30363d
 ```
 
-No `CONTEXT.md` in the repo, so the set runs in **legacy mode**: it writes no documents into your employer's codebase and imposes no test discipline you did not ask for.
+This is someone else's codebase, on someone else's clock, and there's no `CONTEXT.md` in it. **Legacy mode**: nothing gets written into it, and no test discipline gets imposed that you didn't ask for.
 
 ```
 /discuss
 
-  PROJ-482 — Users report the export button does nothing on Safari.
+  PROJ-482: Users report the export button does nothing on Safari.
   Acceptance: export works on Safari 16+.
 ```
 
-The interview fills in what the ticket left open and adds nothing it did not ask for. The plan stays in the conversation — nothing touches disk.
+The interview fills in what the ticket left open and adds nothing it didn't ask for. The plan stays in the conversation. Nothing touches disk.
 
 ```
 /implement
 ```
 
-Before the first change, `/implement` asks how this run should be verified: lint and typecheck plus a traced logic check, the existing tests nearest the change, or characterization tests written first. Your answer is the standard for the run. When every step's done-condition holds, it calls `review` itself, fixes what comes back, and re-reviews — three rounds at most, then whatever is left comes to you.
+Before the first change, `/implement` asks how this run should be verified: lint and typecheck plus a traced logic check, the existing tests nearest the change, or characterization tests written first. Your answer becomes the standard for the run. Once every step's done-condition holds, it calls `review` itself, fixes what comes back, and re-reviews. Three rounds at most, then whatever's left comes to you.
 
 ---
 
@@ -228,13 +228,15 @@ flowchart LR
     style D fill:#0d1117,color:#fff,stroke:#30363d
 ```
 
+A cent goes missing on checkout, only when a discount is applied, and nobody can say why yet.
+
 ```
 /investigate  Checkout total is off by one cent, but only for orders with a discount
 ```
 
-It reproduces the bug on demand first — a test, a script, a command. Then it traces from the symptom to the line that causes it. **A hypothesis counts as confirmed only when changing that one thing changes the symptom**; every candidate it rules out is reported with the reason.
+It reproduces the bug on demand first: a test, a script, a command. Then it traces from the symptom to the line that causes it. **A hypothesis counts as confirmed only when changing that one thing changes the symptom**; every candidate it rules out is reported with the reason.
 
-It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan — then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.workspace/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder goes when the last ticket closes.
+It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan. Then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.workspace/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder goes when the last ticket closes.
 
 ---
 
@@ -247,6 +249,8 @@ flowchart LR
     style B fill:#161b22,color:#c9d1d9,stroke:#30363d
     style D fill:#161b22,color:#c9d1d9,stroke:#30363d
 ```
+
+Nobody wants to touch `src/billing`. Nobody can say exactly why, only that it's worse than it looks.
 
 ```
 /audit  src/billing
@@ -262,7 +266,7 @@ A pattern repeated across five files is one finding with five locations, not fiv
 
 ```mermaid
 flowchart LR
-    A["/research"] --> B(["scout the outside"]) --> C(["candidates — you pick"]) --> D(["deep dive + one real spike"]) --> E(["research.md"])
+    A["/research"] --> B(["scout the outside"]) --> C(["candidates, you pick"]) --> D(["deep dive + one real spike"]) --> E(["research.md"])
     E --> F{"Still a choice<br/>to make?"}
     F -->|"Yes"| G["/discuss-with-docs"]
     F -->|"No"| H["/write-tickets"]
@@ -279,11 +283,11 @@ Two situations, one skill: a technology you are weighing up, and a bug that surv
 /research  should we move the reporting queries from Prisma to Drizzle
 ```
 
-Wave one is a **scout** — agents in parallel on the official docs and their version matrix, on the source repo's issues and changelog, on the community, and one on your own codebase for fit. What comes back is a short candidate list, and nothing goes deeper until you say which ones are worth it.
+Wave one is a **scout**: agents in parallel on the official docs and their version matrix, on the source repo's issues and changelog, on the community, and one on your own codebase for fit. What comes back is a short candidate list, and nothing goes deeper until you say which ones are worth it.
 
 Wave two is a **deep dive**, one agent per candidate you kept. Every claim carries its source, the version it applies to, and its date, checked against the versions your project actually pins.
 
-Then the part that separates this from reading blog posts: the one claim the whole recommendation rests on gets a **throwaway spike** — in a temp folder outside your repo, actually run, its output recorded, the folder deleted afterwards. A claim that cannot be proved that way is marked unverified with the reason, never quietly dropped.
+Then the part that separates this from reading blog posts: the one claim the whole recommendation rests on gets a **throwaway spike**, run in a temp folder outside your repo, its output recorded, the folder deleted afterwards. A claim that can't be proved that way is marked unverified with the reason, never quietly dropped.
 
 You are left with `.workspace/<issue-name>/research.md`, and it names its own next step: `/discuss-with-docs` while a choice is still yours to make, `/write-tickets` when the findings are settled work, `/implement` when it turned out to be one small change.
 
@@ -296,17 +300,17 @@ Whether a repo has a `CONTEXT.md` at its root decides how every skill behaves.
 |  | **Own project**<br/>`CONTEXT.md` present | **Legacy**<br/>no `CONTEXT.md` |
 | --- | --- | --- |
 | **Work comes from** | A spec, split into tickets | A ticket you paste from your tracker |
-| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.workspace/` — all gitignored | None, beyond `.workspace/` when you ask for it — kept out of the remote via `.git/info/exclude` |
+| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.workspace/`, all gitignored | None, beyond `.workspace/` when you ask for it, kept out of the remote via `.git/info/exclude` |
 | **Tests** | An acceptance test per criterion, written before the code, red-green per step | Whatever you choose at the start of `/implement` |
 | **Design rules** | `DESIGN.md` | The components already in the code |
 
-Run `/setup-new-project` (empty repo) or `/setup-project` (existing code) once to make a repo an own project. `/setup-project` reads your stack, commands, conventions, and tests from the code and asks only what the code cannot say — and where there is no test suite, it never imposes one.
+Run `/setup-new-project` (empty repo) or `/setup-project` (existing code) once to make a repo an own project. `/setup-project` reads your stack, commands, conventions, and tests from the code and asks only what the code cannot say. Where there is no test suite, it never imposes one.
 
 ---
 
 ## Where work lives
 
-Each piece of work is one folder that disappears when its last ticket is done.
+Each piece of work lives in one folder, and that folder disappears the moment its last ticket is done.
 
 ```
 .workspace/
@@ -345,12 +349,12 @@ Each piece of work is one folder that disappears when its last ticket is done.
 | [`/brainstorm`](.claude/skills/brainstorm/SKILL.md) | Widen a raw idea: three directions a round until one is clear enough to plan. |
 | [`/discuss`](.claude/skills/discuss/SKILL.md) | Settle a plan one question at a time. Stays in the conversation. |
 | [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. When a PRD-driven kickoff is open, offers an API requirement step first and covers its full scope. |
-| [`/write-design-brief`](.claude/skills/write-design-brief/SKILL.md) | Interview a PRD's features into pages, components, and typography direction — for `/prototype` or an outsourced UI/UX team. |
+| [`/write-design-brief`](.claude/skills/write-design-brief/SKILL.md) | Interview a PRD's features into pages, components, and typography direction, for `/prototype` or an outsourced UI/UX team. |
 | [`/prototype`](.claude/skills/prototype/SKILL.md) | Clickable self-contained HTML: three options to choose from, or one refined page. |
 | [`/investigate`](.claude/skills/investigate/SKILL.md) | Prove a bug's root cause with evidence, then route the fix. |
 | [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
 | [`/audit`](.claude/skills/audit/SKILL.md) | Report where a codebase can improve, as HTML plus a spec. |
-| [`/write-tickets`](.claude/skills/write-tickets/SKILL.md) | Split a spec into tickets with criteria, checklist, and blockers — local files or GitHub Issues. |
+| [`/write-tickets`](.claude/skills/write-tickets/SKILL.md) | Split a spec into tickets with criteria, checklist, and blockers, as local files or GitHub Issues. |
 | [`/find-ready-tickets`](.claude/skills/find-ready-tickets/SKILL.md) | Scan every spec's tickets for the ones ready to build now, without opening each one, and get the exact next command. |
 | [`/implement`](.claude/skills/implement/SKILL.md) | Build one ticket or one plan on the current branch, then hand off to review. |
 | [`/implement-all`](.claude/skills/implement-all/SKILL.md) | Build every open ticket in parallel, one branch each, merged and reviewed as a whole. |
@@ -359,7 +363,7 @@ Each piece of work is one folder that disappears when its last ticket is done.
 
 | Skill | Job |
 | --- | --- |
-| [`review`](.claude/skills/review/SKILL.md) | Check a diff on Spec, Standards, Logic & Security — plus UI/UX when the diff is visible. Reports; never edits. |
+| [`review`](.claude/skills/review/SKILL.md) | Check a diff on Spec, Standards, Logic & Security, plus UI/UX when the diff is visible. Reports; never edits. |
 | [`discussing`](.claude/skills/discussing/SKILL.md) | The shared interview loop behind every discuss entry point. |
 | [`implementing`](.claude/skills/implementing/SKILL.md) | The shared build loop behind `/implement` and `/implement-all`. |
 | [`designing`](.claude/skills/designing/SKILL.md) | Write or complete `DESIGN.md`, by interview or by extraction from existing code. |
@@ -394,9 +398,9 @@ Six rules run through every skill. They are what make this feel different from p
 .agents/skills/<name>/                       the same tree, for Codex and others
 ```
 
-Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
+Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
 
-**Manual install** — if you would rather not use the CLI:
+**Manual install**, if you'd rather not use the CLI:
 
 - **Claude Code, every project:** copy each skill folder into `~/.claude/skills/`
 - **Codex and other agents:** copy each skill folder into `.agents/skills/` (repo) or `~/.agents/skills/` (user)
@@ -405,7 +409,7 @@ Both trees hold the same skills; the `skills` CLI reads either one and installs 
 
 ## Adding your own skill
 
-Call `writing-for-agents` — it carries the naming rules, the layout, and the pruning pass every document here has been through. The short version:
+Call `writing-for-agents`. It carries the naming rules, the layout, and the pruning pass every document here has been through. The short version:
 
 - A core skill is one bare verb (`discuss`); a variant of it adds a suffix (`discuss-with-docs`).
 - A loop that several skills share is a gerund (`discussing`).
@@ -413,7 +417,7 @@ Call `writing-for-agents` — it carries the naming rules, the layout, and the p
 - Every skill ships an `agents/openai.yaml` so it works outside Claude Code.
 - Every new skill gets a row in `ask-me` and in this README, in the same change.
 
-Issues and pull requests are welcome.
+Open an issue or send a PR, either works.
 
 ---
 
