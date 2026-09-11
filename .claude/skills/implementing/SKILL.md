@@ -24,7 +24,7 @@ Read `CLAUDE.md` / `AGENTS.md` and `CONTEXT.md` where present, `DESIGN.md` and t
 - **Callers**: for every function, type, endpoint, or schema the plan changes, search for every caller. Callers the change affects join the plan's steps. Done when the search is exhaustive; memory does not count.
 - **Standards**: in the mode's priority. New code takes the shape of its neighbours: naming, structure, error handling, test style. A neighbour that is clearly flawed (a bug, a pattern the documented conventions forbid, a dead idiom) is put to the user as one question with options and a recommendation, discuss-style, before it is copied.
 - **Reuse**: before creating any UI component, read the Patterns and Components of `DESIGN.md` (legacy: the components already in the code) and search the codebase for one serving the same purpose. One that fits behind a new prop is extended, never copied; one entity's create and edit are one component in two modes. A near-duplicate you judge unavoidable is a deviation: put it to the user as one question with options and a recommendation, discuss-style.
-- **Legacy verification** (also an own project whose `CONTEXT.md` says `tests: none`): ask one question before the first change: A. lint and typecheck plus a traced logic check of the changed path (recommended, the default); B. the existing tests nearest the change; C. characterization tests written first for the code touched. The answer is the verification for this run.
+- **Legacy verification** (also an own project whose `CONTEXT.md` says `tests: none`): ask one question before the first change: A. lint and typecheck plus a traced logic check of the changed path (recommended, the default); B. the existing tests nearest the change; C. characterization tests written first for the code touched; D. TDD — a failing test per checklist step before any code for it. The answer is the verification for this run.
 
 ## Build
 
@@ -36,7 +36,9 @@ A ticket goes to `in-progress` first (GitHub: the label).
 2. Per checklist step: a failing test (the acceptance test, or a smaller one), the smallest code that passes it, then tidy without changing behaviour. Tick the step's box when its done-condition holds.
 3. The full suite is green at the end.
 
-**Legacy** (and `tests: none`): work the steps in order. A step is done when its done-condition holds under the verification the user chose. Run the repo's lint, typecheck, and existing suite once at the end.
+**Legacy** (and `tests: none`), verification chosen is D: per checklist step, a failing test first, the smallest code that passes it, then tidy without changing behaviour — the same rhythm as the own-project steps above, sourced from the checklist instead of an acceptance criterion. Tick the step's box when its done-condition holds; the full suite is green at the end.
+
+**Legacy** (and `tests: none`), any other verification: work the steps in order. A step is done when its done-condition holds under the verification the user chose. Run the repo's lint, typecheck, and existing suite once at the end.
 
 When the plan turns out to be wrong or blocked (a step cannot be done as written, or a decision it rests on is false), stop and put the conflict to the user as one question with options and a recommendation, discuss-style. Deviation is the user's call.
 

@@ -211,7 +211,7 @@ The interview fills in what the ticket left open and adds nothing it didn't ask 
 /implement
 ```
 
-Before the first change, `/implement` asks how this run should be verified: lint and typecheck plus a traced logic check, the existing tests nearest the change, or characterization tests written first. Your answer becomes the standard for the run. Once every step's done-condition holds, it calls `review` itself, fixes what comes back, and re-reviews. Three rounds at most, then whatever's left comes to you.
+Before the first change, `/implement` asks how this run should be verified: lint and typecheck plus a traced logic check, the existing tests nearest the change, characterization tests written first, or TDD — a failing test per checklist step before any code for it. Your answer becomes the standard for the run. Once every step's done-condition holds, it calls `review` itself, fixes what comes back, and re-reviews. Three rounds at most, then whatever's left comes to you.
 
 ---
 
