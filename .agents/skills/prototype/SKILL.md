@@ -9,7 +9,7 @@ Prototyping produces HTML the user can open and react to; it never touches the a
 
 ## Before building
 
-Facts are your job. Read what the user wrote, then the source of the spec: a `.workspace/<issue-name>/spec.md` and its UX flow, `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)) for the page's purpose and features when no spec exists yet, a pasted ticket, `CONTEXT.md`, or, for an existing page, the page and components that render it now. The prototype carries the real content, fields, states, and flows of that spec, never lorem ipsum. Look and behaviour follow `DESIGN.md` where it exists ([DESIGN-FORMAT.md](../setup-new-project/DESIGN-FORMAT.md)), otherwise the app's existing fonts, colours, spacing, and components, unless the user asked for a new look.
+Facts are your job. Read what the user wrote, then the source of the spec: a `.workspace/<issue-name>/spec.md` and its UX flow, `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)) for the page's purpose and features when no spec exists yet, a pasted ticket, `CONTEXT.md`, or, for an existing page, the page and components that render it now. `.workspace/design-reference/` holding files: an outsourced UI/UX team's output, read as real input for the page's structure and layout alongside the sources above. The prototype carries the real content, fields, states, and flows of that spec, never lorem ipsum. Look and behaviour follow `DESIGN.md` where it exists ([DESIGN-FORMAT.md](../setup-new-project/DESIGN-FORMAT.md)), otherwise the app's existing fonts, colours, spacing, and components, unless the user asked for a new look.
 
 Ask, discuss-style ([discussing](../discussing/SKILL.md) format, one per turn), only what the spec leaves open and the build depends on. Always settle one thing first when the user did not say it: the purpose.
 
@@ -32,5 +32,5 @@ If the harness can show HTML to the user directly (Claude Code: the Artifact too
 
 Every file opens and every named interaction works. Then:
 
-1. Options: ask one question, the three options with the line each optimises for, one recommended with why. Once the user picks, delete the other two and `index.html`; the pick, renamed to `prototype.html`, is the reference. Refine: ask whether it matches; adjust, one round per turn, until it does.
+1. Options: ask one question, the three options with the line each optimises for, one recommended with why. Once the user picks, delete the other two and `index.html`; the pick, renamed to `prototype.html`, is the reference. `.workspace/design-reference/` held files read for this build: offer to delete it too, now that the real prototype supersedes it — decline leaves it in place. Refine: ask whether it matches; adjust, one round per turn, until it does.
 2. Tell the user what to run next with the file path: `/discuss` when the requirements behind the page are still open, `/implement` when they are settled and the prototype is the plan's visual reference. Stop.

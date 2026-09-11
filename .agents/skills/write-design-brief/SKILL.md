@@ -20,4 +20,4 @@ Call the Skill tool with "discussing". The plan being settled is the content of 
 
 ## Done when
 
-Every page in the brief traces to a PRD feature and the user has confirmed it. Then tell the user the two ways on: `/prototype` for each page, to build the UI/UX in this session, or hand `.workspace/DESIGN_BRIEF.md` to an outsourced UI/UX team and come back to `/discuss-with-docs` once the design exists. Stop.
+Every page in the brief traces to a PRD feature and the user has confirmed it. Create `.workspace/design-reference/` if missing. Then tell the user the two ways on: `/prototype` for each page, to build the UI/UX in this session, or hand `.workspace/DESIGN_BRIEF.md` to an outsourced UI/UX team, drop what comes back into `.workspace/design-reference/`, then run `/prototype` to build from it (or come back to `/discuss-with-docs` once the design exists without prototyping here). Stop.
