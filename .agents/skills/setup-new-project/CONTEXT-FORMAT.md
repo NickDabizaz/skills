@@ -11,7 +11,7 @@ One paragraph: what it is for and who uses it.
 
 ## Domain
 
-- **<Entity>**: what it is; how it relates to the others; the invariants that must hold.
+- **<Entity>** (`<identifier>`): what it is; how it relates to the others; the invariants that must hold.
 
 ## Stack
 
@@ -19,6 +19,7 @@ One paragraph: what it is for and who uses it.
 
 ## Conventions
 
+- Identifiers, filenames, and slugs are English regardless of the conversation's language; prose (comments, commit messages, UI copy) follows the project's stated language. Every Domain entity carries its English identifier beside it, so a term coined in another language never has to be re-translated mid-build.
 - <A rule no tool enforces: naming, layout, error handling, test style. One line each, with the reason when it is not obvious.>
 
 ## Commands

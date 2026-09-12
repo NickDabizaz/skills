@@ -21,6 +21,8 @@ Ask, stop, wait for the answer, then ask the next. Each question:
 - Leaves the user free to answer outside the options.
 - Is written in the user's language: short, direct, to the point.
 
+The user's language stops at the conversation. Anything that becomes a filename, slug, or identifier stays English regardless — own project: [CONTEXT-FORMAT.md](../setup-new-project/CONTEXT-FORMAT.md)'s Conventions carries the rule.
+
 If the harness offers a question tool with selectable options (Claude Code: `AskUserQuestion`), use it: recommended option first, labelled "(Recommended)". Otherwise use this format:
 
 ```

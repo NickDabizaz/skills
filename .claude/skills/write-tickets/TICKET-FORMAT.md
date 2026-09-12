@@ -35,6 +35,7 @@ One paragraph: what this ticket delivers and why, in the spec's words.
 Rules:
 
 - Every criterion comes from the spec or the investigate report, quoted or tightened, never invented.
+- `<slug>` is the ticket's English identifier — own project: the `CONTEXT.md` Domain entity it belongs to, or the nearest English rendering when none fits. `title` may stay in the spec's language; the slug never does.
 - Visual reference is the spec's path verbatim, carried only into the ticket that builds that screen.
 - Checklist steps are in build order; each done-condition is checkable by someone who did not attend the discussion.
 - `implement` owns the boxes and `status`. GitHub: `gh issue edit` for the boxes, `gh issue close` for `done`.
