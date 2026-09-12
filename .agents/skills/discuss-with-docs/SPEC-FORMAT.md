@@ -15,6 +15,7 @@ One paragraph: the problem and the outcome, in the user's words where possible.
 
 ## UX flow
 
+- Visual reference: <path to the chosen prototype, when `/prototype` produced one>
 - **<Screen>**: entered from <where>. <Action> → <what the user sees on success> / <on failure>. Empty: <...>. Loading: <...>. Error: <...>. Success: <...>.
 
 ## Plan
@@ -34,7 +35,7 @@ One paragraph: the problem and the outcome, in the user's words where possible.
 Rules:
 
 - One decision per settled question, each with its reason. A decision without a reason cannot be revisited later.
-- No code snippets and no file paths, unless the decision is about that file or the path is the investigate report the goal links. Both go stale fast.
+- No code snippets and no file paths, unless the decision is about that file, the path is the investigate report the goal links, or it is the prototype named in the UX flow's visual reference. All three go stale fast otherwise.
 - A spec written from an `investigate` or `research` report ends its goal with a link to the `report.md` or `research.md` beside it. The evidence, the ruled-out candidates, the reproduction steps and the sources stay there; the spec never copies them.
 - The PRD-driven kickoff's spec — the first one written while `.workspace/PRD.md` exists and before any spec links it — ends its goal with a link to it too, and to `.workspace/DESIGN_BRIEF.md` / `.workspace/API_REQUIREMENT.md` when they exist. A later spec written while `.workspace/PRD.md` still exists (its tickets not yet all done) is not the kickoff spec and never links it. `implement` and `implement-all` delete all three, alongside this folder, when the kickoff spec's last ticket closes ([MODES.md](../implementing/MODES.md)).
 - UX flow only when the work touches UI; otherwise the section is absent. Each state it names is also an acceptance criterion.

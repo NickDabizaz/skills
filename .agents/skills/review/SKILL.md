@@ -10,7 +10,7 @@ Review the changes against the plan and the codebase, then report. Review report
 - **Diff**: what the user or implement points at. Default: uncommitted changes plus commits ahead of the default branch. An empty diff stops the review here.
 - **Plan**: the ticket and spec given, else the `.workspace/*/spec.md` matching the work, else the plan agreed in the conversation. With no plan, the Spec axis reports "no plan available" and the other two axes still run.
 - **Standards**: `CLAUDE.md` / `AGENTS.md`, `CONTEXT.md`, any documented coding standards, and the code neighbouring each change, in the mode's priority: documented conventions first, then what the existing code already does.
-- **Design**: `DESIGN.md` where it exists ([DESIGN-FORMAT.md](../setup-new-project/DESIGN-FORMAT.md)), otherwise the components and theme already in the code; and the plan's UX flow.
+- **Design**: `DESIGN.md` where it exists ([DESIGN-FORMAT.md](../setup-new-project/DESIGN-FORMAT.md)), otherwise the components and theme already in the code; the plan's UX flow; and the ticket's Visual reference file, when it carries one.
 
 ## The axes
 
@@ -22,7 +22,7 @@ Three axes always; UI/UX joins them when the diff changes anything the user sees
 
 **Logic & Security**: does the diff hold up? Report wrong logic; unhandled edge cases (empty, null, boundary, concurrent, failure paths); callers of a changed function, type, endpoint, or schema that the diff leaves unadjusted; input crossing a trust boundary without validation; injection; secrets or sensitive data exposed; missing auth or permission checks; resources never released.
 
-**UI/UX**: does the diff hold up for the user? Report a screen in the UX flow missing an empty, loading, error, or success state; an action with no visible feedback; an interactive control missing its hover, focus-visible, active, disabled, or loading state; motion or elevation that is not a `DESIGN.md` token; tokens, components, or Patterns the diff departs from (legacy: neighbouring components); a component built where an existing one fits, and two components carrying one entity's fields; a control without a label, a focus state, or readable contrast.
+**UI/UX**: does the diff hold up for the user? Report a screen in the UX flow missing an empty, loading, error, or success state; an action with no visible feedback; an interactive control missing its hover, focus-visible, active, disabled, or loading state; motion or elevation that is not a `DESIGN.md` token; tokens, components, or Patterns the diff departs from (legacy: neighbouring components); a component built where an existing one fits, and two components carrying one entity's fields; a control without a label, a focus state, or readable contrast; the ticket's Visual reference and the diff's structure, layout, or copy diverging, with no agreed deviation on record.
 
 Report only what is worth a fix. A nitpick the user would ignore is noise.
 

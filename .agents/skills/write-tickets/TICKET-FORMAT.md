@@ -15,6 +15,10 @@ blocked-by: [01, 02]
 
 One paragraph: what this ticket delivers and why, in the spec's words.
 
+## Visual reference
+
+<path to the prototype file, when the spec's UX flow names one for a screen this ticket builds; section omitted otherwise>
+
 ## Acceptance criteria
 
 - [ ] Given <starting state>, when <action>, then <observable result>.
@@ -31,5 +35,6 @@ One paragraph: what this ticket delivers and why, in the spec's words.
 Rules:
 
 - Every criterion comes from the spec or the investigate report, quoted or tightened, never invented.
+- Visual reference is the spec's path verbatim, carried only into the ticket that builds that screen.
 - Checklist steps are in build order; each done-condition is checkable by someone who did not attend the discussion.
 - `implement` owns the boxes and `status`. GitHub: `gh issue edit` for the boxes, `gh issue close` for `done`.
