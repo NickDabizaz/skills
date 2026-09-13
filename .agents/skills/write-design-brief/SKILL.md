@@ -4,7 +4,7 @@ description: "Interview the user about pages, features per page, components, and
 disable-model-invocation: true
 ---
 
-No `.workspace/PRD.md` ([PRD-FORMAT.md](../setup-new-project/PRD-FORMAT.md)): stop and tell the user to run `/setup-new-project` (the PRD-driven kickoff option) first. There is no product to brief without it.
+No `.workspace/PRD.md` ([PRD-FORMAT.md](../setup-project/PRD-FORMAT.md)): stop and tell the user to run `/setup-project` (the PRD-driven kickoff option) first. There is no product to brief without it.
 
 ## Interview
 

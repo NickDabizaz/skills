@@ -19,7 +19,7 @@ None: stop and tell the user to run `/discuss-with-docs`, `/investigate`, `/rese
 
 ## Split
 
-- One ticket per unit that can be built, tested, reviewed, and merged on its own: one or a few acceptance criteria, in one area of the code where possible. Audit findings in one area with one cause become one ticket; the ticket names the finding ids it covers.
+- One ticket per unit that can be built, tested, reviewed, and merged on its own: one or a few acceptance criteria. Vertical, never horizontal: a ticket cuts a narrow but complete path through every layer its criteria touch (schema, API, UI, test), so it is demoable standalone; a ticket confined to one layer (all-backend, all-frontend) waits until it is merged with the layers that complete it. Audit findings in one area with one cause become one ticket; the ticket names the finding ids it covers.
 - A spec's UX flow naming a visual reference: the ticket that builds that screen carries the same path in its own Visual reference section ([TICKET-FORMAT.md](TICKET-FORMAT.md)).
 - Every acceptance criterion of the spec lands in exactly one ticket; the ticket's checklist carries the spec's steps that serve it, each with its done-condition.
 - `blocked-by` lists the tickets whose output this one needs. A cycle is a split error: re-split until none remains.

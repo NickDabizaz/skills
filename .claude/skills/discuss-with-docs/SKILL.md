@@ -5,7 +5,7 @@ argument-hint: "<what you want to build or change>"
 disable-model-invocation: true
 ---
 
-`.workspace/PRD.md` ([PRD-FORMAT.md](../setup-new-project/PRD-FORMAT.md)) exists and no `.workspace/*/spec.md` yet links it: this is the PRD-driven kickoff's first run, and the interview below covers the PRD's full scope rather than one narrow feature. `.workspace/API_REQUIREMENT.md` not written yet: one question first, skippable, to write it (endpoints, auth, data contracts, in [API_REQUIREMENT-FORMAT.md](API_REQUIREMENT-FORMAT.md)) from `.workspace/PRD.md`, `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)) when it exists, and whatever UI/UX now exists. A later run, once some spec already links `.workspace/PRD.md`: this is an unrelated feature, not the kickoff — skip this paragraph entirely, even while `.workspace/PRD.md` still exists.
+`.workspace/PRD.md` ([PRD-FORMAT.md](../setup-project/PRD-FORMAT.md)) exists and no `.workspace/*/spec.md` yet links it: this is the PRD-driven kickoff's first run, and the interview below covers the PRD's full scope rather than one narrow feature. `.workspace/API_REQUIREMENT.md` not written yet: one question first, skippable, to write it (endpoints, auth, data contracts, in [API_REQUIREMENT-FORMAT.md](API_REQUIREMENT-FORMAT.md)) from `.workspace/PRD.md`, `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)) when it exists, and whatever UI/UX now exists. A later run, once some spec already links `.workspace/PRD.md`: this is an unrelated feature, not the kickoff — skip this paragraph entirely, even while `.workspace/PRD.md` still exists.
 
 Call the Skill tool with "discussing".
 

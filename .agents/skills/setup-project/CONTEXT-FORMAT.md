@@ -1,6 +1,6 @@
 # CONTEXT.md format
 
-Path: repo root, gitignored. Its presence marks the repo as an own project ([MODES.md](../implementing/MODES.md)). `setup-new-project` or `setup-project` writes it; `discuss`, `implement`, `review`, `write-tickets`, `investigate`, `research`, and `audit` read it. Design rules live beside it in `DESIGN.md` ([DESIGN-FORMAT.md](DESIGN-FORMAT.md)).
+Path: repo root, gitignored. Its presence marks the repo as an own project ([MODES.md](../implementing/MODES.md)). `setup-project` writes it; `discuss`, `implement`, `review`, `write-tickets`, `investigate`, `research`, `audit`, and `domain-modeling` read it. Design rules live beside it in `DESIGN.md` ([DESIGN-FORMAT.md](DESIGN-FORMAT.md)).
 
 ```md
 # <Project>
@@ -41,5 +41,5 @@ Rules:
 
 - Domain lines are the model `discuss` reasons with; keep them current when a feature changes the model.
 - Commands only when no config file states them; otherwise the config is the source of truth.
-- `tests` is the one line `implement` and `review` read for the test discipline (MODES.md). `setup-new-project` writes `acceptance`; `setup-project` writes `acceptance` when a runner and a suite exist, `none` otherwise. Change it to `acceptance` by hand once a suite exists.
+- `tests` is the one line `implement` and `review` read for the test discipline (MODES.md). `setup-project` writes `acceptance` on an empty repo, or on one with code only when a runner and a suite already exist there, `none` otherwise. Change it to `acceptance` by hand once a suite exists.
 - `backend` is the one line `write-tickets` and `implement` read to find tickets.

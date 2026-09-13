@@ -4,11 +4,11 @@
 
 **A workflow for coding agents that asks before it builds.**
 
-Twenty-one skills that take you from a vague idea to reviewed, shipped code, one decision at a time.
+Twenty-two skills that take you from a vague idea to reviewed, shipped code, one decision at a time.
 
 [![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
-[![Skills](https://img.shields.io/badge/skills-21-blue?style=flat-square)](#skill-reference)
+[![Skills](https://img.shields.io/badge/skills-22-blue?style=flat-square)](#skill-reference)
 
 ```bash
 npx skills add NickDabizaz/skills
@@ -117,7 +117,7 @@ flowchart TD
     style SHIP fill:#1a7f37,color:#fff,stroke:none
 ```
 
-`/prototype` sits beside `/discuss`: when a screen is easier to judge than to describe, it builds clickable HTML first.
+`/prototype` sits beside `/discuss`: when a screen is easier to judge than to describe, it builds clickable HTML first. `/triage` sits before all five: an issue or PR that arrived from outside gets sorted and routed onto the chain — to `/investigate`, `/discuss`, or `/write-tickets` — before anyone builds anything.
 
 ---
 
@@ -300,11 +300,11 @@ Whether a repo has a `CONTEXT.md` at its root decides how every skill behaves.
 |  | **Own project**<br/>`CONTEXT.md` present | **Legacy**<br/>no `CONTEXT.md` |
 | --- | --- | --- |
 | **Work comes from** | A spec, split into tickets | A ticket you paste from your tracker |
-| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.workspace/`, all gitignored | None, beyond `.workspace/` when you ask for it, kept out of the remote via `.git/info/exclude` |
+| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.workspace/`, `DECISIONS.md` once a decision calls for it, all gitignored | None, beyond `.workspace/` when you ask for it, kept out of the remote via `.git/info/exclude` |
 | **Tests** | An acceptance test per criterion, written before the code, red-green per step | Whatever you choose at the start of `/implement` |
 | **Design rules** | `DESIGN.md` | The components already in the code |
 
-Run `/setup-new-project` (empty repo) or `/setup-project` (existing code) once to make a repo an own project. `/setup-project` reads your stack, commands, conventions, and tests from the code and asks only what the code cannot say. Where there is no test suite, it never imposes one.
+Run `/setup-project` once to make a repo an own project. An empty repo gets a full interview, with an optional PRD-driven kickoff first; a repo with code gets read for stack, commands, conventions, and tests, and asked only what the code cannot say. Where there is no test suite, it never imposes one.
 
 ---
 
@@ -314,7 +314,7 @@ Each piece of work lives in one folder, and that folder disappears the moment it
 
 ```
 .workspace/
-  PRD.md               written by /setup-new-project's PRD-driven kickoff
+  PRD.md               written by /setup-project's PRD-driven kickoff
   DESIGN_BRIEF.md      written by /write-design-brief
   API_REQUIREMENT.md   written by /discuss-with-docs
   subscription-tracker/
@@ -344,14 +344,14 @@ Each piece of work lives in one folder, and that folder disappears the moment it
 | Skill | Job |
 | --- | --- |
 | [`/ask-me`](.claude/skills/ask-me/SKILL.md) | Describe your situation, get pointed at the right skill with the reason. |
-| [`/setup-new-project`](.claude/skills/setup-new-project/SKILL.md) | Interview once; write `CONTEXT.md`, `DESIGN.md`, and the instruction file for an empty repo. Offers a PRD-driven kickoff first for a brand-new product. |
-| [`/setup-project`](.claude/skills/setup-project/SKILL.md) | The same documents for a repo that already has code, read from the code first. |
+| [`/setup-project`](.claude/skills/setup-project/SKILL.md) | Interview an empty repo, or read one that already has code; write `CONTEXT.md`, `DESIGN.md`, and the instruction file either way. Offers a PRD-driven kickoff first for a brand-new product. |
 | [`/brainstorm`](.claude/skills/brainstorm/SKILL.md) | Widen a raw idea: three directions a round until one is clear enough to plan. |
 | [`/discuss`](.claude/skills/discuss/SKILL.md) | Settle a plan one question at a time. Stays in the conversation. |
 | [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. When a PRD-driven kickoff is open, offers an API requirement step first and covers its full scope. |
 | [`/write-design-brief`](.claude/skills/write-design-brief/SKILL.md) | Interview a PRD's features into pages, components, and typography direction, for `/prototype` or an outsourced UI/UX team. |
 | [`/prototype`](.claude/skills/prototype/SKILL.md) | Clickable self-contained HTML: three options to choose from, or one refined page. |
 | [`/investigate`](.claude/skills/investigate/SKILL.md) | Prove a bug's root cause with evidence, then route the fix. |
+| [`/triage`](.claude/skills/triage/SKILL.md) | Categorise and verify an issue or PR that arrived from outside, then route it onto the chain or reject it with a reason. |
 | [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
 | [`/audit`](.claude/skills/audit/SKILL.md) | Report where a codebase can improve, as HTML plus a spec. |
 | [`/write-tickets`](.claude/skills/write-tickets/SKILL.md) | Split a spec into tickets with criteria, checklist, and blockers, as local files or GitHub Issues. |
@@ -367,6 +367,7 @@ Each piece of work lives in one folder, and that folder disappears the moment it
 | [`discussing`](.claude/skills/discussing/SKILL.md) | The shared interview loop behind every discuss entry point. |
 | [`implementing`](.claude/skills/implementing/SKILL.md) | The shared build loop behind `/implement` and `/implement-all`. |
 | [`designing`](.claude/skills/designing/SKILL.md) | Write or complete `DESIGN.md`, by interview or by extraction from existing code. |
+| [`domain-modeling`](.claude/skills/domain-modeling/SKILL.md) | Sharpen a fuzzy domain term into `CONTEXT.md`, or record a hard-to-reverse decision to `DECISIONS.md`. |
 | [`resolve-merge-conflicts`](.claude/skills/resolve-merge-conflicts/SKILL.md) | Resolve merge conflicts using the spec and both tickets as the reference. |
 | [`writing-for-agents`](.claude/skills/writing-for-agents/SKILL.md) | The rules every document here follows. Use it to write your own. |
 

@@ -1,9 +1,9 @@
 ---
 name: designing
-description: "Write or complete DESIGN.md for an own project: interview a new project about its users, tone, style preset, and code patterns, or extract tokens, patterns, and components from an existing codebase and confirm them. Called by setup-new-project and setup-project, and by discussing when UI work meets an own project without DESIGN.md; not a starting point on its own."
+description: "Write or complete DESIGN.md for an own project: interview a new project about its users, tone, style preset, and code patterns, or extract tokens, patterns, and components from an existing codebase and confirm them. Called by setup-project, and by discussing when UI work meets an own project without DESIGN.md; not a starting point on its own."
 ---
 
-Produces `DESIGN.md` at the repo root in the format of [DESIGN-FORMAT.md](../setup-new-project/DESIGN-FORMAT.md); nothing else. If the file exists, read it first and only fill what is missing.
+Produces `DESIGN.md` at the repo root in the format of [DESIGN-FORMAT.md](../setup-project/DESIGN-FORMAT.md); nothing else. If the file exists, read it first and only fill what is missing.
 
 ## Pick the path
 

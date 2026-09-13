@@ -10,7 +10,7 @@ Review the changes against the plan and the codebase, then report. Review report
 - **Diff**: what the user or implement points at. Default: uncommitted changes plus commits ahead of the default branch. An empty diff stops the review here.
 - **Plan**: the ticket and spec given, else the `.workspace/*/spec.md` matching the work, else the plan agreed in the conversation. With no plan, the Spec axis reports "no plan available" and the other two axes still run.
 - **Standards**: `CLAUDE.md` / `AGENTS.md`, `CONTEXT.md`, any documented coding standards, and the code neighbouring each change, in the mode's priority: documented conventions first, then what the existing code already does.
-- **Design**: `DESIGN.md` where it exists ([DESIGN-FORMAT.md](../setup-new-project/DESIGN-FORMAT.md)), otherwise the components and theme already in the code; the plan's UX flow; and the ticket's Visual reference file, when it carries one.
+- **Design**: `DESIGN.md` where it exists ([DESIGN-FORMAT.md](../setup-project/DESIGN-FORMAT.md)), otherwise the components and theme already in the code; the plan's UX flow; and the ticket's Visual reference file, when it carries one.
 
 ## The axes
 

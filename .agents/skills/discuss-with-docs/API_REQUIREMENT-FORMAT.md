@@ -1,6 +1,6 @@
 # API requirement format
 
-Path: `.workspace/API_REQUIREMENT.md`. `discuss-with-docs` writes it, offered and skippable, at the start of the PRD-driven kickoff's first run, once UI/UX exists, from `.workspace/PRD.md` ([PRD-FORMAT.md](../setup-new-project/PRD-FORMAT.md)) and `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)); the kickoff spec reads it. Deleted, with those two, once that spec's last ticket closes ([MODES.md](../implementing/MODES.md)).
+Path: `.workspace/API_REQUIREMENT.md`. `discuss-with-docs` writes it, offered and skippable, at the start of the PRD-driven kickoff's first run, once UI/UX exists, from `.workspace/PRD.md` ([PRD-FORMAT.md](../setup-project/PRD-FORMAT.md)) and `.workspace/DESIGN_BRIEF.md` ([DESIGN_BRIEF-FORMAT.md](../write-design-brief/DESIGN_BRIEF-FORMAT.md)); the kickoff spec reads it. Deleted, with those two, once that spec's last ticket closes ([MODES.md](../implementing/MODES.md)).
 
 ```md
 # <Product> API requirements

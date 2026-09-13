@@ -9,6 +9,10 @@ Path: `.workspace/<issue-name>/spec.md`; its tickets sit in `.workspace/<issue-n
 
 One paragraph: the problem and the outcome, in the user's words where possible.
 
+## Actors & activities
+
+- **<Actor>** (person or third-party system): <what it does>. Rules: <the constraints that govern it>.
+
 ## Decisions
 
 - **<Decision>**: <choice>. Why: <reason>.
@@ -34,7 +38,8 @@ One paragraph: the problem and the outcome, in the user's words where possible.
 
 Rules:
 
-- One decision per settled question, each with its reason. A decision without a reason cannot be revisited later.
+- Actors & activities only when the work defines a new application or feature (per `discussing`); otherwise the section is absent, same condition as UX flow's UI-only one.
+- One decision per settled question, each with its reason. A decision without a reason cannot be revisited later. Own project with `tests: acceptance`: one decision named **Test seam** names the boundary every acceptance criterion below runs against.
 - No code snippets and no file paths, unless the decision is about that file, the path is the investigate report the goal links, or it is the prototype named in the UX flow's visual reference. All three go stale fast otherwise.
 - A spec written from an `investigate` or `research` report ends its goal with a link to the `report.md` or `research.md` beside it. The evidence, the ruled-out candidates, the reproduction steps and the sources stay there; the spec never copies them.
 - The PRD-driven kickoff's spec — the first one written while `.workspace/PRD.md` exists and before any spec links it — ends its goal with a link to it too, and to `.workspace/DESIGN_BRIEF.md` / `.workspace/API_REQUIREMENT.md` when they exist. A later spec written while `.workspace/PRD.md` still exists (its tickets not yet all done) is not the kickoff spec and never links it. `implement` and `implement-all` delete all three, alongside this folder, when the kickoff spec's last ticket closes ([MODES.md](../implementing/MODES.md)).

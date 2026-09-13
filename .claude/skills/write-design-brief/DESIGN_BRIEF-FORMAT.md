@@ -1,6 +1,6 @@
 # Design brief format
 
-Path: `.workspace/DESIGN_BRIEF.md`. `write-design-brief` writes it from `.workspace/PRD.md` ([PRD-FORMAT.md](../setup-new-project/PRD-FORMAT.md)); `prototype` reads it for which pages to build and their features, `designing` reads it to skip questions it already answers. Deleted, with `.workspace/PRD.md` and `.workspace/API_REQUIREMENT.md`, once the PRD-driven kickoff's spec closes its last ticket ([MODES.md](../implementing/MODES.md)).
+Path: `.workspace/DESIGN_BRIEF.md`. `write-design-brief` writes it from `.workspace/PRD.md` ([PRD-FORMAT.md](../setup-project/PRD-FORMAT.md)); `prototype` reads it for which pages to build and their features, `designing` reads it to skip questions it already answers. Deleted, with `.workspace/PRD.md` and `.workspace/API_REQUIREMENT.md`, once the PRD-driven kickoff's spec closes its last ticket ([MODES.md](../implementing/MODES.md)).
 
 ```md
 # <Product> design brief
