@@ -48,7 +48,8 @@ When the plan turns out to be wrong or blocked (a step cannot be done as written
 When every step's done-condition holds and verification passes, call the Skill tool with "review", pointing it at the diff, the ticket, and the spec.
 
 - Findings: fix them, then call the Skill tool with "review" again. Three rounds at most; findings still open after the third go to the user as-is.
-- PASS: ticket to `done` (GitHub: close the issue). When it was the spec's last open ticket and no `implement-all` run owns the cleanup, delete `.workspace/<issue-name>/` (the ideas, the spec, and its tickets); its goal links `.workspace/PRD.md`: delete that, `.workspace/DESIGN_BRIEF.md`, and `.workspace/API_REQUIREMENT.md` too, whichever exist.
-- Report done: what was built, how it was verified, and anything the user should know.
+- PASS, run from `/implement`: ask one question, discuss-style — close the ticket now, or try it manually first. Manual: give a short test guide aimed at what automated verification can't see (business edge cases, other devices, felt speed), not a rerun of acceptance criteria already known to pass; then proceed to close in the same turn. Either answer ends at the same place: ticket to `done` (GitHub: close the issue). When it was the spec's last open ticket and no `implement-all` run owns the cleanup, delete `.workspace/<issue-name>/` (the ideas, the spec, and its tickets); its goal links `.workspace/PRD.md`: delete that, `.workspace/DESIGN_BRIEF.md`, and `.workspace/API_REQUIREMENT.md` too, whichever exist.
+- PASS, run from `/implement-all`: close the same way, without asking; the batch isn't interrupted per ticket. Count it towards the batch's final report.
+- Report done: what was built, how it was verified, and anything the user should know. `implement-all`'s final report additionally states how many tickets in the batch closed without a manual sign-off.
 
 Commit only when the user or the calling skill asks.

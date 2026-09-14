@@ -29,7 +29,7 @@ Route the user to the one skill that fits their situation. Point, never fire: th
 | A merge or rebase stopped on conflicts | `resolve-merge-conflicts` | Resolves by the spec and both tickets; asks when neither decides. Called by implement-all, or by you. |
 | Code has changed and should be checked against the plan, the codebase's conventions, and for bugs or security holes | `review` | Reports on Spec, Standards, Logic & Security; touches nothing. |
 | `DESIGN.md` should be written or completed for an own project | `designing` | Interviews a new project or extracts tokens, patterns, and components from existing code. Called by setup-project and discussing. |
-| A domain term is fuzzy, or a decision just made is hard to reverse and worth recording | `domain-modeling` | Sharpens the term into `CONTEXT.md`'s Domain section, or records the decision to `DECISIONS.md`. Called by discussing, implementing, and investigate; callable directly. |
+| A domain term is fuzzy, or a decision just made is hard to reverse and worth recording | `domain-modeling` | Sharpens the term into `CONTEXT.md`'s Domain section, or records the decision to `DECISIONS.md`. Called by discussing, implementing, investigate, and prototype; callable directly. |
 | Writing or editing a skill, `CLAUDE.md`, `AGENTS.md`, `CONTEXT.md`, or `DESIGN.md` | `writing-for-agents` | The pruning and structure rules every document here follows. |
 
 Every new skill added to the set gets a row here.

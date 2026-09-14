@@ -43,13 +43,15 @@ Work that touches UI settles its **UX flow** as well: each screen, where the use
 
 Own project with `tests: acceptance` ([MODES.md](../implementing/MODES.md)) settles its **test seam** as well: the one boundary — unit, integration, or end-to-end — where every acceptance criterion above will run, pitched as high in the stack as the criteria allow so one seam covers as many of them as it can. Propose it, discuss-style, before the plan is presented. A criterion that cannot run at the chosen seam names a second seam, justified on its own, never a silent exception.
 
+Once actors/activities and UX flow (when present) are settled, ask one question, discuss-style, offering an explicit "none" option: whether the work carries **non-functional requirements** — a measurable target for speed, concurrency, or data security, say. "None" is a full answer, not a placeholder; most internal or low-stakes changes end there. Anything else settles into `## Non-functional requirements` per [SPEC-FORMAT.md](../discuss-with-docs/SPEC-FORMAT.md).
+
 Every answer reshapes the plan: a settled decision surfaces the decisions that hang off it. Recompute what is still open after each answer.
 
 ## Done when
 
 No open decision remains that would change what gets built, and nothing is silently assumed. Then:
 
-1. Present the plan: goal, actors/activities/rules when the work defines a new application or feature, decisions taken with their reasons, test seam for an own project with `tests: acceptance`, UX flow when the work touches UI (each screen with its entry point, actions with their visible results, and its empty, loading, error, and success states, each state also an acceptance criterion), ordered implementation steps each ending on a checkable done-condition, acceptance criteria as Given/When/Then (one state, one action, one observable result each), out of scope.
+1. Present the plan: goal, actors/activities/rules when the work defines a new application or feature, decisions taken with their reasons, test seam for an own project with `tests: acceptance`, UX flow when the work touches UI (each screen with its entry point, actions with their visible results, and its empty, loading, error, and success states, each state also an acceptance criterion), non-functional requirements when settled to more than "none" (each target also an acceptance criterion), ordered implementation steps each ending on a checkable done-condition, acceptance criteria as Given/When/Then (one state, one action, one observable result each), out of scope.
 2. Ask the user to confirm the plan matches their intent. Settle any disagreement with further questions, one per turn.
 3. Do whatever the calling skill asked for once the plan is confirmed.
 4. Tell the user what to run next, as the calling skill names it. Stop.

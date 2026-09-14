@@ -13,6 +13,8 @@ Facts are your job. Read what the user wrote, then the source of the spec: a `.w
 
 Ask, discuss-style ([discussing](../discussing/SKILL.md) format, one per turn), only what the spec leaves open and the build depends on. Always settle one thing first when the user did not say it: the purpose.
 
+When `.workspace/design-reference/` and `DESIGN.md` both apply and disagree — different tokens, components, or interaction patterns — ask one question before building: use the outsourced reference, or follow `DESIGN.md`, summarising every mismatch found so far in that one question rather than one per mismatch. Once answered, call the Skill tool with "domain-modeling" to record the choice, so the same reconciliation doesn't need re-litigating within this build.
+
 - **Options**: the user has no picture, or wants to compare directions. Build three.
 - **Refine**: the user has a page and wants it better. Build one.
 

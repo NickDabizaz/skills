@@ -1,6 +1,6 @@
 ---
 name: domain-modeling
-description: "Sharpen a fuzzy domain term, or record a hard-to-reverse decision, the moment either surfaces. Reached by discussing, implementing, and investigate when a term or a decision needs settling; callable directly too."
+description: "Sharpen a fuzzy domain term, or record a hard-to-reverse decision, the moment either surfaces. Reached by discussing, implementing, investigate, and prototype when a term or a decision needs settling; callable directly too."
 ---
 
 Domain modeling is active, not a read: challenging a term until it is precise, or a decision until its trade-off is named, then writing it down before the conversation moves past it. Reading `CONTEXT.md` for vocabulary already settled is not this skill — every skill does that on its own.

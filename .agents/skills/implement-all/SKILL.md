@@ -26,4 +26,4 @@ Until no open ticket remains:
 
 1. Call the Skill tool with "review" on the target branch's whole diff against the spec. Findings: fix on the target branch, review again, three rounds at most.
 2. PASS: delete `.workspace/<issue-name>/` (local) or confirm every issue is closed and delete the spec folder (GitHub); its goal links `.workspace/PRD.md`: delete that, `.workspace/DESIGN_BRIEF.md`, and `.workspace/API_REQUIREMENT.md` too, whichever exist. Delete the ticket branches.
-3. Report: tickets built in merge order, conflicts and how each was decided, verification, anything still open.
+3. Report: tickets built in merge order, conflicts and how each was decided, verification, how many tickets closed without a manual sign-off ([implementing](../implementing/SKILL.md)), anything still open.

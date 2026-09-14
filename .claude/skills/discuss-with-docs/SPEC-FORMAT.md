@@ -17,6 +17,10 @@ One paragraph: the problem and the outcome, in the user's words where possible.
 
 - **<Decision>**: <choice>. Why: <reason>.
 
+## Non-functional requirements
+
+- <Target>: <measurable threshold>. Verified by: <how it's checked>.
+
 ## UX flow
 
 - Visual reference: <path to the chosen prototype, when `/prototype` produced one>
@@ -39,6 +43,7 @@ One paragraph: the problem and the outcome, in the user's words where possible.
 Rules:
 
 - Actors & activities only when the work defines a new application or feature (per `discussing`); otherwise the section is absent, same condition as UX flow's UI-only one.
+- Non-functional requirements only when `discussing` settled at least one target; "none" leaves the section absent, same condition as Actors & activities and UX flow. Each line is also a line in Acceptance criteria, phrased as Given/When/Then like any other.
 - One decision per settled question, each with its reason. A decision without a reason cannot be revisited later. Own project with `tests: acceptance`: one decision named **Test seam** names the boundary every acceptance criterion below runs against.
 - No code snippets and no file paths, unless the decision is about that file, the path is the investigate report the goal links, or it is the prototype named in the UX flow's visual reference. All three go stale fast otherwise.
 - A spec written from an `investigate` or `research` report ends its goal with a link to the `report.md` or `research.md` beside it. The evidence, the ruled-out candidates, the reproduction steps and the sources stay there; the spec never copies them.
