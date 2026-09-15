@@ -1,0 +1,3 @@
+interface:
+  display_name: "Find Shortcuts"
+  short_description: "Ledger of shortcut markers left in the code"

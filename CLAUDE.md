@@ -10,7 +10,7 @@ This repo is the source of the **Skills** package: a set of coding-agent skills 
 
 Both trees must carry the **same** skill content — the `skills` CLI reads either one depending on which agents the user picks at install time. Edit a skill in one tree, mirror the edit in the other, in the same change.
 
-Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`) live beside the skill that owns them; other skills point at them rather than restating them.
+Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`, `SHORTCUT-FORMAT.md`) live beside the skill that owns them; other skills point at them rather than restating them.
 
 ## Writing or editing a skill
 

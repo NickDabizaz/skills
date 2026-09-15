@@ -4,11 +4,11 @@
 
 **A workflow for coding agents that asks before it builds.**
 
-Twenty-two skills that take you from a vague idea to reviewed, shipped code, one decision at a time.
+Twenty-three skills that take you from a vague idea to reviewed, shipped code, one decision at a time.
 
 [![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
-[![Skills](https://img.shields.io/badge/skills-22-blue?style=flat-square)](#skill-reference)
+[![Skills](https://img.shields.io/badge/skills-23-blue?style=flat-square)](#skill-reference)
 
 ```bash
 npx skills add NickDabizaz/skills
@@ -39,7 +39,7 @@ A good colleague asks those questions before touching the keyboard. This set is 
 | One paragraph, then code | One question at a time until nothing is ambiguous |
 | The agent decides what you meant | You decide; the agent gathers the facts |
 | "Done" means the code compiles | "Done" means a named condition holds |
-| Review is you, reading a diff | Review is a separate pass on four axes |
+| Review is you, reading a diff | Review is a separate pass on five axes |
 
 ---
 
@@ -363,12 +363,13 @@ Each piece of work lives in one folder, and that folder disappears the moment it
 
 | Skill | Job |
 | --- | --- |
-| [`review`](.claude/skills/review/SKILL.md) | Check a diff on Spec, Standards, Logic & Security, plus UI/UX when the diff is visible. Reports; never edits. |
+| [`review`](.claude/skills/review/SKILL.md) | Check a diff on Spec, Standards, Logic & Security, Simplicity, plus UI/UX when the diff is visible. Reports; never edits. |
 | [`discussing`](.claude/skills/discussing/SKILL.md) | The shared interview loop behind every discuss entry point. |
 | [`implementing`](.claude/skills/implementing/SKILL.md) | The shared build loop behind `/implement` and `/implement-all`. |
 | [`designing`](.claude/skills/designing/SKILL.md) | Write or complete `DESIGN.md`, by interview or by extraction from existing code. |
 | [`domain-modeling`](.claude/skills/domain-modeling/SKILL.md) | Sharpen a fuzzy domain term into `CONTEXT.md`, or record a hard-to-reverse decision to `DECISIONS.md`. |
 | [`resolve-merge-conflicts`](.claude/skills/resolve-merge-conflicts/SKILL.md) | Resolve merge conflicts using the spec and both tickets as the reference. |
+| [`find-shortcuts`](.claude/skills/find-shortcuts/SKILL.md) | Ledger every deliberate shortcut `implement` marked in the code, flagging any with no revisit trigger. |
 | [`writing-for-agents`](.claude/skills/writing-for-agents/SKILL.md) | The rules every document here follows. Use it to write your own. |
 
 ---
@@ -399,7 +400,7 @@ Six rules run through every skill. They are what make this feel different from p
 .agents/skills/<name>/                       the same tree, for Codex and others
 ```
 
-Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
+Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`, `SHORTCUT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
 
 **Manual install**, if you'd rather not use the CLI:
 
