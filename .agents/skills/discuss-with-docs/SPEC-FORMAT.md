@@ -23,7 +23,8 @@ One paragraph: the problem and the outcome, in the user's words where possible.
 
 ## UX flow
 
-- Visual reference: <path to the chosen prototype, when `/prototype` produced one>
+- Baseline per screen: <approved reference/prototype path and version when one applies; viewports, states, and agreed deviations>
+- Screen contract: <reconciled field/action inventory per FIDELITY.md; extract from the brief and approved prototype when present>
 - **<Screen>**: entered from <where>. <Action> → <what the user sees on success> / <on failure>. Empty: <...>. Loading: <...>. Error: <...>. Success: <...>.
 
 ## Plan
@@ -45,10 +46,12 @@ Rules:
 - Actors & activities only when the work defines a new application or feature (per `discussing`); otherwise the section is absent, same condition as UX flow's UI-only one.
 - Non-functional requirements only when `discussing` settled at least one target; "none" leaves the section absent, same condition as Actors & activities and UX flow. Each line is also a line in Acceptance criteria, phrased as Given/When/Then like any other.
 - One decision per settled question, each with its reason. A decision without a reason cannot be revisited later. Own project with `tests: acceptance`: one decision named **Test seam** names the boundary every acceptance criterion below runs against.
-- No code snippets and no file paths, unless the decision is about that file, the path is the investigate report the goal links, or it is the prototype named in the UX flow's visual reference. All three go stale fast otherwise.
+- No code snippets and no file paths, unless the decision is about that file, the path is the investigate report the goal links, or it identifies the approved UI baseline, its assets, or verification evidence. All three go stale fast otherwise.
 - A spec written from an `investigate` or `research` report ends its goal with a link to the `report.md` or `research.md` beside it. The evidence, the ruled-out candidates, the reproduction steps and the sources stay there; the spec never copies them.
-- The PRD-driven kickoff's spec — the first one written while `.workspace/PRD.md` exists and before any spec links it — ends its goal with a link to it too, and to `.workspace/DESIGN_BRIEF.md` / `.workspace/API_REQUIREMENT.md` when they exist. A later spec written while `.workspace/PRD.md` still exists (its tickets not yet all done) is not the kickoff spec and never links it. `implement` and `implement-all` delete all three, alongside this folder, when the kickoff spec's last ticket closes ([MODES.md](../implementing/MODES.md)).
+- The PRD-driven kickoff's spec — the first one written while `.workspace/PRD.md` exists and before any spec links it — ends its goal with a link to it too, and to `.workspace/DESIGN_BRIEF.md` / `.workspace/API_REQUIREMENT.md` when they exist. A later spec written while `.workspace/PRD.md` still exists (whether its tickets are open or complete) is not the kickoff spec and never links it. Keep these linked records after completion ([MODES.md](../implementing/MODES.md)).
 - UX flow only when the work touches UI; otherwise the section is absent. Each state it names is also an acceptance criterion.
 - Acceptance criteria are checkable by someone who did not attend the discussion, and each one becomes a test in an own project: one state, one action, one observable result per line.
 - There is no "Open questions" section. An open question means discuss is not done.
-- The spec is the reference for its tickets. It stays until every ticket is done; implement deletes the whole `.workspace/<issue-name>/` folder then.
+- The spec is the reference for its tickets, retained with them after completion per [MODES.md](../implementing/MODES.md).
+
+UI with a reference follows [FIDELITY.md](../prototype/FIDELITY.md): acceptance criteria include the screen contract and verified render parity at the agreed viewports/states. A baseline is required whenever the user supplied or approved one, including images or HTML/CSS without a `/prototype` run. Revisions reconcile affected criteria and open tickets before the new baseline is used.

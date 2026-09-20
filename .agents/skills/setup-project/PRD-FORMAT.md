@@ -1,6 +1,6 @@
 # PRD format
 
-Path: `.workspace/PRD.md`. `setup-project` writes it when the user takes the PRD-driven kickoff on an empty repo; `write-design-brief`, and `discuss-with-docs` for that project's first spec, read it. Deleted, with `.workspace/DESIGN_BRIEF.md` and `.workspace/API_REQUIREMENT.md` when they exist, once that spec's last ticket closes ([MODES.md](../implementing/MODES.md)).
+Path: `.workspace/PRD.md`. `setup-project` writes it when the user takes the PRD-driven kickoff on an empty repo; `write-design-brief`, and `discuss-with-docs` for that project's first spec, read it. Retained as kickoff history after that spec's last ticket closes ([MODES.md](../implementing/MODES.md)).
 
 ```md
 # <Product> PRD

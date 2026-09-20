@@ -23,12 +23,12 @@ Each finding gets an id (`A-01`, `A-02`, ...), a theme, an impact and an effort 
 
 ## Write
 
-Folder `.workspace/audit/`. Files there already: read, then overwrite; ids restart at `A-01`. Legacy: when `.workspace/` is not ignored, add it to `.git/info/exclude`.
+Folder `.workspace/audit/`. Files there already: read them and continue that audit unless the user requests a fresh run. Before replacing a report or spec, preserve a versioned copy and reconcile open tickets with the new findings; keep ids stable for carried findings. Legacy: when `.workspace/` is not ignored, add it to `.git/info/exclude`.
 
 1. `report.html` per [REPORT-FORMAT.md](REPORT-FORMAT.md), in the user's language.
 2. `spec.md` per [SPEC-FORMAT.md](../discuss-with-docs/SPEC-FORMAT.md): goal is the audit's scope; one decision per theme naming the target state; one plan step per finding, its done-condition the proposed state, the finding's files named (the step is about them); one acceptance criterion per finding; out of scope lists what was not audited. Every id in the report is in the spec.
 
-If the harness can show HTML to the user directly (Claude Code: the Artifact tool), show `report.html` as well; the files on disk are the deliverable. The folder stays until `implement` closes its last ticket; run `/audit` again for a fresh report.
+If the harness can show HTML to the user directly (Claude Code: the Artifact tool), show `report.html` as well; the files on disk are the deliverable. The folder is retained after completion per MODES.md; run `/audit` again for a fresh report.
 
 ## Done when
 

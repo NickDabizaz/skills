@@ -91,6 +91,7 @@ flowchart TD
     E5 --> RES["/research<br/>gather the facts"]
 
     BR -->|"ideas.md"| DIS
+    PRO["/prototype<br/>reproduce · explore · refine"] -->|"approved baseline"| DIS
     DIS -->|"spec.md"| WT["/write-tickets"]
     INV -->|"report.md"| WT
     AUD -->|"report.html + spec.md"| WT
@@ -117,7 +118,7 @@ flowchart TD
     style SHIP fill:#1a7f37,color:#fff,stroke:none
 ```
 
-`/prototype` sits beside `/discuss`: when a screen is easier to judge than to describe, it builds clickable HTML first. `/triage` sits before all five: an issue or PR that arrived from outside gets sorted and routed onto the chain — to `/investigate`, `/discuss`, or `/write-tickets` — before anyone builds anything.
+`/prototype` sits beside `/discuss`: supplied HTML/CSS or JPG/PNG designs are reproduced 1:1; when the layout is still open, it builds clickable options. The approved version and screen contract pass through the spec and tickets to implementation; review requires paired render evidence under [FIDELITY.md](.claude/skills/prototype/FIDELITY.md). `/triage` sits before all five: an issue or PR that arrived from outside gets sorted and routed onto the chain — to `/investigate`, `/discuss`, or `/write-tickets` — before anyone builds anything.
 
 ---
 
@@ -236,7 +237,7 @@ A cent goes missing on checkout, only when a discount is applied, and nobody can
 
 It reproduces the bug on demand first: a test, a script, a command. Then it traces from the symptom to the line that causes it. **A hypothesis counts as confirmed only when changing that one thing changes the symptom**; every candidate it rules out is reported with the reason.
 
-It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan. Then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.workspace/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder goes when the last ticket closes.
+It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan. Then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.workspace/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder remains as history after the last ticket closes.
 
 ---
 
@@ -310,7 +311,7 @@ Run `/setup-project` once to make a repo an own project. An empty repo gets a fu
 
 ## Where work lives
 
-Each piece of work lives in one folder, and that folder disappears the moment its last ticket is done.
+Each piece of work lives in one folder. Completed tickets, specs, kickoff documents, approved designs, and comparison evidence stay at their existing paths as history; they are removed only when you ask.
 
 ```
 .workspace/
@@ -328,7 +329,7 @@ Each piece of work lives in one folder, and that folder disappears the moment it
       03-renewal-reminders.md
 ```
 
-`PRD.md`, `DESIGN_BRIEF.md`, and `API_REQUIREMENT.md` sit directly under `.workspace/`, not inside one issue's folder: read once by the chain, deleted together when the kickoff spec's tickets are all done.
+`PRD.md`, `DESIGN_BRIEF.md`, and `API_REQUIREMENT.md` sit directly under `.workspace/`, not inside one issue's folder: retained as kickoff history when its tickets are done. The spec owns subsequent requirement changes.
 
 `.workspace/` is gitignored in an own project, and kept out of the remote via `.git/info/exclude` in a legacy repo. Nothing here ever reaches a pull request.
 
@@ -349,7 +350,7 @@ Each piece of work lives in one folder, and that folder disappears the moment it
 | [`/discuss`](.claude/skills/discuss/SKILL.md) | Settle a plan one question at a time. Stays in the conversation. |
 | [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. When a PRD-driven kickoff is open, offers an API requirement step first and covers its full scope. |
 | [`/write-design-brief`](.claude/skills/write-design-brief/SKILL.md) | Interview a PRD's features into pages, components, and typography direction, for `/prototype` or an outsourced UI/UX team. |
-| [`/prototype`](.claude/skills/prototype/SKILL.md) | Clickable self-contained HTML: three options to choose from, or one refined page. |
+| [`/prototype`](.claude/skills/prototype/SKILL.md) | Reproduce HTML/CSS or JPG/PNG designs 1:1, explore options, or refine a page; preserve the approved baseline for implementation. |
 | [`/investigate`](.claude/skills/investigate/SKILL.md) | Prove a bug's root cause with evidence, then route the fix. |
 | [`/triage`](.claude/skills/triage/SKILL.md) | Categorise and verify an issue or PR that arrived from outside, then route it onto the chain or reject it with a reason. |
 | [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
@@ -400,7 +401,7 @@ Six rules run through every skill. They are what make this feel different from p
 .agents/skills/<name>/                       the same tree, for Codex and others
 ```
 
-Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`, `SHORTCUT-FORMAT.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
+Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`, `SHORTCUT-FORMAT.md`, `FIDELITY.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
 
 **Manual install**, if you'd rather not use the CLI:
 

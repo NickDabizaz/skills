@@ -3,7 +3,7 @@ name: designing
 description: "Write or complete DESIGN.md for an own project: interview a new project about its users, tone, style preset, and code patterns, or extract tokens, patterns, and components from an existing codebase and confirm them. Called by setup-project, and by discussing when UI work meets an own project without DESIGN.md; not a starting point on its own."
 ---
 
-Produces `DESIGN.md` at the repo root in the format of [DESIGN-FORMAT.md](../setup-project/DESIGN-FORMAT.md); nothing else. If the file exists, read it first and only fill what is missing.
+Produces `DESIGN.md` at the repo root in the format of [DESIGN-FORMAT.md](../setup-project/DESIGN-FORMAT.md); nothing else. If the file exists, read it first: fill missing sections and reconcile explicit approved design changes per [FIDELITY.md](../prototype/FIDELITY.md), preserving unrelated decisions.
 
 ## Pick the path
 
@@ -18,7 +18,7 @@ Ask in the [discussing](../discussing/SKILL.md) format, one question per turn, w
 - Tone: the one or two words the interface should feel like, and a product the user points at as a reference.
 - Mobile-first or desktop-first.
 - Tokens the user already has (brand colours, fonts); otherwise propose a baseline that fits the tone, as one question with options.
-- The style preset: one question, these three options, the one nearest the tone recommended. The pick fills radius, elevation, motion, and density, and decides how each interaction state is drawn; the user tunes any line afterwards. Colour stays with the token question above.
+- When supplied references already settle tokens, extract them under FIDELITY.md; ask only for unresolved values. Otherwise the style preset is one question, these three options, the one nearest the tone recommended. The pick fills radius, elevation, motion, and density, and decides how each interaction state is drawn; the user tunes any line afterwards. Colour stays with the token question above.
   - **Clean**: radius 6px; layers separated by borders, shadow under overlays only; 150ms ease-out; controls 40px.
   - **Soft**: radius 12–16px; layered soft shadows; 200ms ease-out, overlays fade and rise; controls 44px.
   - **Bold**: radius 2–4px; flat, heavy borders; 120ms linear; controls 36px; a large display step in the type scale.

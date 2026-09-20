@@ -17,7 +17,7 @@ One paragraph: what this ticket delivers and why, in the spec's words.
 
 ## Visual reference
 
-<path to the prototype file, when the spec's UX flow names one for a screen this ticket builds; section omitted otherwise>
+<approved baseline path and version; link to the spec screen contract; applicable viewports/states and approved deviations; omit only when no reference applies>
 
 ## Acceptance criteria
 
@@ -36,6 +36,6 @@ Rules:
 
 - Every criterion comes from the spec or the investigate report, quoted or tightened, never invented.
 - `<slug>` is the ticket's English identifier — own project: the `CONTEXT.md` Domain entity it belongs to, or the nearest English rendering when none fits. `title` may stay in the spec's language; the slug never does.
-- Visual reference is the spec's path verbatim, carried only into the ticket that builds that screen.
+- Visual reference carries the spec's baseline identity verbatim into every ticket affecting that screen. Read [FIDELITY.md](../prototype/FIDELITY.md) for contract preservation and evidence; link the inventory instead of paraphrasing it.
 - Checklist steps are in build order; each done-condition is checkable by someone who did not attend the discussion.
 - `implement` owns the boxes and `status`. GitHub: `gh issue edit` for the boxes, `gh issue close` for `done`.

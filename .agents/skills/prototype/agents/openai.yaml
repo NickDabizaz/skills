@@ -1,5 +1,5 @@
 interface:
   display_name: "Prototype"
-  short_description: "HTML options or one refined design for a page"
+  short_description: "Reproduce designs 1:1, explore, or refine UI"
 policy:
   allow_implicit_invocation: false

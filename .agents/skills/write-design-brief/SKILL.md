@@ -12,6 +12,7 @@ Call the Skill tool with "discussing". The plan being settled is the content of 
 
 - Pages: one per distinct screen the user reaches, each with the PRD features it carries.
 - Components: what each page needs, named once even when several pages share it.
+- Screen details: fields, actions, states, and supplied references per [FIDELITY.md](../prototype/FIDELITY.md). Extract what is already known; settle missing decisions before handing the page off.
 - Typography direction: a mood or a reference product, not a full type scale — `DESIGN.md`'s style preset covers that.
 
 ## Write
