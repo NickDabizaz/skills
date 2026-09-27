@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Clarify a change in conversation"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan Project"
+  short_description: "Plan project architecture and setup"
+policy:
+  allow_implicit_invocation: false

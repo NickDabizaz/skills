@@ -1,0 +1,5 @@
+interface:
+  display_name: "Find Ready Tickets"
+  short_description: "Find work with no open blockers"
+policy:
+  allow_implicit_invocation: false

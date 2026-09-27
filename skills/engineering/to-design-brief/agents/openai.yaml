@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Design Brief"
+  short_description: "Define screens before prototyping"
+policy:
+  allow_implicit_invocation: false

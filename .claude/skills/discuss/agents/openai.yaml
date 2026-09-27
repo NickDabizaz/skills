@@ -1,5 +1,0 @@
-interface:
-  display_name: "Discuss"
-  short_description: "Settle intent and context one question at a time"
-policy:
-  allow_implicit_invocation: false

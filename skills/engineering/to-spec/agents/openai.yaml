@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Spec"
+  short_description: "Write a spec for a clear issue"
+policy:
+  allow_implicit_invocation: false

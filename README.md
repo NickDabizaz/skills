@@ -1,431 +1,148 @@
-<div align="center">
-
 # Skills
 
-**A workflow for coding agents that asks before it builds.**
+Engineering skills for turning a project idea or existing codebase into planned, designed, ticketed, implemented, and reviewed software. The package is a collection of agent instructions: no runtime, build step, or framework is required.
 
-Twenty-three skills that take you from a vague idea to reviewed, shipped code, one decision at a time.
-
-[![License](https://img.shields.io/github/license/NickDabizaz/skills?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/github/v/tag/NickDabizaz/skills?style=flat-square&label=version)](https://github.com/NickDabizaz/skills/tags)
-[![Skills](https://img.shields.io/badge/skills-23-blue?style=flat-square)](#skill-reference)
-
-```bash
+```sh
 npx skills add NickDabizaz/skills
 ```
 
-Works with Claude Code, Codex, Cursor, and every other agent the [`skills`](https://skills.sh) CLI supports.
+Choose the skills and agent in the installer. Install all 17 for the full workflow; a selective install also needs the supporting skills called by its chosen entry points. This repository keeps one source tree at [`skills/engineering/`](skills/engineering/). The installer places selected skills in the directory used by the selected agent.
 
-</div>
+## Start here
 
----
+Run `/ask-me` when you are unsure what to do next. For a new product or an existing repository without project context, begin with `/plan-project`. It inspects what exists, helps settle the application boundaries, stack, infrastructure, modules, data model, and issue tracker, and writes the project's agent-facing context. It plans the foundation; implementation happens through tickets.
 
-## Contents
-
-[Why](#why-this-exists) · [Install](#install) · [The system](#the-system) · [Where to start](#where-to-start) · [Walkthroughs](#walkthroughs) · [Modes](#the-two-modes) · [Files](#where-work-lives) · [Reference](#skill-reference) · [Principles](#how-it-thinks) · [Contributing](#adding-your-own-skill)
-
----
-
-## Why this exists
-
-You type one paragraph. The agent starts typing back immediately: new files, a renamed function, a migration you didn't ask for. Thirty minutes later you're reading a diff, trying to work out what it decided on your behalf, and undoing half of it.
-
-Nothing here is broken. The agent did exactly what you said. The problem is everything you *didn't* say: who this is for, what should happen when it fails, whether the old behavior still needs to work. All of that got decided for you, silently, because nobody asked.
-
-A good colleague asks those questions before touching the keyboard. This set is built to do the same. One skill for a vague idea, one for a bug, one for a ticket you already have, and none of them guess through ambiguity, they stall on it instead. Once you've answered, the answer doesn't get lost: it gets carried through tickets, through code, through review, all the way to something shipped.
-
-| Without | With |
-| --- | --- |
-| One paragraph, then code | One question at a time until nothing is ambiguous |
-| The agent decides what you meant | You decide; the agent gathers the facts |
-| "Done" means the code compiles | "Done" means a named condition holds |
-| Review is you, reading a diff | Review is a separate pass on five axes |
-
----
-
-## Install
-
-```bash
-# Recommended: pick your skills and your agents when prompted
-npx skills add NickDabizaz/skills
-
-# Browse what is in here without installing anything
-npx skills add NickDabizaz/skills --list
-
-# Take only the ones you want
-npx skills add NickDabizaz/skills --skill discuss --skill implement --skill review
-
-# Choose the agents yourself
-npx skills add NickDabizaz/skills -a claude-code -a codex
-
-# Install for every project instead of just this one
-npx skills add NickDabizaz/skills -g
+```text
+/plan-project  A customer portal and internal operations app sharing one database
+/grill-with-docs  Add customer invitation to the account module
+/to-tickets  .workspace/issues/customer-invitation/spec.md
+/find-ready-tickets
+/implement  .workspace/issues/customer-invitation/tickets/01-backend-invitation.md
 ```
 
-> [!TIP]
-> **Careful with `--all`.** It expands to `--skill '*' --agent '*' -y`: every skill, **every agent the CLI can detect**, and no prompts. It writes `.claude/`, `.agents/`, `agent/` and a `skills-lock.json` into your folder in one shot. Fine for CI, surprising on a laptop. The CLI also goes non-interactive by itself once it detects it is running inside an agent session.
->
-> Installed something you did not mean to? `npx skills list` shows what landed and `npx skills remove` takes it back out.
+Use `/grill-me` when you want to settle a change in conversation first. It offers `/to-spec` when the decisions are complete. Use `/grill-with-docs` when you want that interview to update project/domain docs and write the issue spec directly. A clear existing plan can go straight to `/to-spec`.
 
----
+Every skill ends by reporting its result and offering the next relevant step. An offer does not silently run a user-invoked skill; if a decision is missing, the skill names the blocker instead.
 
-## The system
+## The flow
 
-Five ways in. One chain out. Every arrow is a hand-off the skill performs for you.
-
-```mermaid
-flowchart TD
-    subgraph entry["Where you come from"]
-        direction LR
-        E1["A vague idea"]
-        E2["A change you<br/>already want"]
-        E3["A bug"]
-        E4["A codebase that<br/>needs work"]
-        E5["A question the repo<br/>cannot answer"]
-    end
-
-    E1 --> BR["/brainstorm<br/>widen"]
-    E2 --> DIS["/discuss<br/>/discuss-with-docs<br/>narrow"]
-    E3 --> INV["/investigate<br/>prove the cause"]
-    E4 --> AUD["/audit<br/>find the work"]
-    E5 --> RES["/research<br/>gather the facts"]
-
-    BR -->|"ideas.md"| DIS
-    PRO["/prototype<br/>reproduce · explore · refine"] -->|"approved baseline"| DIS
-    DIS -->|"spec.md"| WT["/write-tickets"]
-    INV -->|"report.md"| WT
-    AUD -->|"report.html + spec.md"| WT
-    RES -->|"research.md"| DIS
-    RES -->|"research.md"| WT
-    INV -.->|"out of leads"| RES
-
-    WT -->|"tickets/"| IMP["/implement<br/>/implement-all"]
-    INV -.->|"small fix"| IMP
-    RES -.->|"small change"| IMP
-
-    IMP --> REV["review<br/>Spec · Standards · Logic · UI/UX"]
-    REV -->|"findings"| IMP
-    REV -->|"pass"| SHIP(["Shipped"])
-
-    style BR fill:#1f6feb,color:#fff,stroke:none
-    style DIS fill:#1f6feb,color:#fff,stroke:none
-    style INV fill:#1f6feb,color:#fff,stroke:none
-    style RES fill:#1f6feb,color:#fff,stroke:none
-    style AUD fill:#1f6feb,color:#fff,stroke:none
-    style WT fill:#8250df,color:#fff,stroke:none
-    style IMP fill:#8250df,color:#fff,stroke:none
-    style REV fill:#bf8700,color:#fff,stroke:none
-    style SHIP fill:#1a7f37,color:#fff,stroke:none
-```
-
-`/prototype` sits beside `/discuss`: supplied HTML/CSS or JPG/PNG designs are reproduced 1:1; when the layout is still open, it builds clickable options. The approved version and screen contract pass through the spec and tickets to implementation; review requires paired render evidence under [FIDELITY.md](.claude/skills/prototype/FIDELITY.md). `/triage` sits before all five: an issue or PR that arrived from outside gets sorted and routed onto the chain — to `/investigate`, `/discuss`, or `/write-tickets` — before anyone builds anything.
-
----
-
-## Where to start
-
-```mermaid
-flowchart TD
-    START{"What do you<br/>have right now?"}
-
-    START -->|"Only a hunch"| BR["/brainstorm"]
-    START -->|"Something is broken"| INV["/investigate"]
-    START -->|"The code needs work"| AUD["/audit"]
-    START -->|"The answer is<br/>outside my code"| RES["/research"]
-    START -->|"A change I want"| Q2{"Can I picture<br/>the screen?"}
-    INV -.->|"Still unexplained"| RES
-
-    Q2 -->|"No"| PRO["/prototype"]
-    Q2 -->|"Yes"| Q3{"Will it span<br/>sessions?"}
-
-    PRO --> Q3
-    Q3 -->|"Yes, leave a spec"| DWD["/discuss-with-docs"]
-    Q3 -->|"No, one sitting"| DIS["/discuss"]
-
-    style START fill:#0d1117,color:#fff,stroke:#30363d
-    style Q2 fill:#0d1117,color:#fff,stroke:#30363d
-    style Q3 fill:#0d1117,color:#fff,stroke:#30363d
-```
-
-Not sure? `/ask-me` is the only name you need to remember. Describe the situation and it points you at one skill, with the reason.
-
-```
-/ask-me   I have a bug but I don't know where it comes from
-```
-
----
-
-## Walkthroughs
-
-### 1 · You have a hunch, not a plan
+### 1. Plan the project
 
 ```mermaid
 flowchart LR
-    A["/brainstorm"] --> B(["ideas.md"]) --> C["/discuss-with-docs"] --> D(["spec.md"]) --> E["/write-tickets"] --> F(["tickets/"]) --> G["/implement-all"] --> H["review"]
-    style B fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style D fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style F fill:#161b22,color:#c9d1d9,stroke:#30363d
+    A["ask-me"] --> P["plan-project"]
+    P --> C["Architecture, domain, issue map"]
+    P -->|Project has UI| D["design-system: DESIGN.md"]
 ```
 
-You want to build *something* around recurring payments. You can't yet say what, only that you keep losing track of them.
-
-```
-/brainstorm  I keep losing track of my subscriptions, feels like there's something here
-```
-
-`/brainstorm` reads your repo first, then answers with **three concrete directions**: deliberately pitched at different ambition levels, each solving a different problem for a different person. It never opens with questions, because you can't answer an abstract question at this stage, but you can always react to something concrete.
-
-You react. Every round closes with one question: *go deeper on this one, or spread again from a new angle?* Rounds continue until the chosen direction has all three of **who it is for**, **the problem it solves**, and **the smallest version already worth using**.
-
-Then the requirements get settled, cut into tickets, and built:
-
-```
-/discuss-with-docs  .workspace/subscription-tracker/ideas.md
-/write-tickets      .workspace/subscription-tracker/spec.md
-/implement-all      .workspace/subscription-tracker/spec.md
-```
-
-`/implement-all` reads the dependency graph, builds unblocked tickets in parallel on their own branches, resolves conflicts against the spec, merges into your target branch, and reviews the whole diff at the end.
-
----
-
-### 2 · You have a ticket from your company's tracker
+### 2. Define an issue
 
 ```mermaid
 flowchart LR
-    A["Paste the ticket"] --> B["/discuss"] --> C(["plan, in the conversation"]) --> D["/implement"] --> E["review"]
-    style C fill:#161b22,color:#c9d1d9,stroke:#30363d
+    U["Unclear idea"] --> G["grill-me"] --> S["to-spec"]
+    U --> GD["grill-with-docs: writes spec"]
+    C["Clear requirements"] --> S
+    I["Incoming issue"] --> T["triage"] --> S
 ```
 
-This is someone else's codebase, on someone else's clock, and there's no `CONTEXT.md` in it. **Legacy mode**: nothing gets written into it, and no test discipline gets imposed that you didn't ask for.
+`grilling` guides the interviews; `domain-modeling` keeps shared terms and rules consistent. For a bug with an unknown cause, `triage` can call `diagnosing-bugs` before the spec is written.
 
-```
-/discuss
-
-  PROJ-482: Users report the export button does nothing on Safari.
-  Acceptance: export works on Safari 16+.
-```
-
-The interview fills in what the ticket left open and adds nothing it didn't ask for. The plan stays in the conversation. Nothing touches disk.
-
-```
-/implement
-```
-
-Before the first change, `/implement` asks how this run should be verified: lint and typecheck plus a traced logic check, the existing tests nearest the change, characterization tests written first, or TDD — a failing test per checklist step before any code for it. Your answer becomes the standard for the run. Once every step's done-condition holds, it calls `review` itself, fixes what comes back, and re-reviews. Three rounds at most, then whatever's left comes to you.
-
----
-
-### 3 · Something is broken and you don't know why
+### 3. Design and divide the work
 
 ```mermaid
 flowchart LR
-    A["/investigate"] --> B(["reproduction"]) --> C(["proven cause"]) --> D{"Time to fix it now?"}
-    D -->|"Yes"| F["/implement"]
-    D -->|"Later"| G(["report.md"]) --> E["/write-tickets"]
-    style B fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style C fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style G fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style D fill:#0d1117,color:#fff,stroke:#30363d
+    S["Approved spec"] --> Q{"Prototype requested?"}
+    Q -->|Yes| B["to-design-brief"] --> P["prototype"] --> T["to-tickets"]
+    Q -->|No| T
 ```
 
-A cent goes missing on checkout, only when a discount is applied, and nobody can say why yet.
+The prototype uses `DESIGN.md` and becomes the visual baseline only after approval.
 
-```
-/investigate  Checkout total is off by one cent, but only for orders with a discount
-```
-
-It reproduces the bug on demand first: a test, a script, a command. Then it traces from the symptom to the line that causes it. **A hypothesis counts as confirmed only when changing that one thing changes the symptom**; every candidate it rules out is reported with the reason.
-
-It never fixes. You get a proven cause, every other caller that runs through the same code, and a fix plan. Then it asks whether you have time to fix it now. Fix now and the plan stays in the conversation for `/implement`. Track it for later and the report is written to `.workspace/<issue-name>/report.md`, which `/write-tickets` splits into tickets; the folder remains as history after the last ticket closes.
-
----
-
-### 4 · The codebase needs work, but you don't know where to start
+### 4. Build and accept
 
 ```mermaid
 flowchart LR
-    A["/audit"] --> B(["report.html"]) --> C["read it"]
-    A --> D(["spec.md"]) --> E["/write-tickets"] --> F["/implement-all"]
-    style B fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style D fill:#161b22,color:#c9d1d9,stroke:#30363d
+    T["to-tickets"] --> F["find-ready-tickets"] --> I["implement"]
+    I --> R["code-review"]
+    R -->|Changes needed| I
+    R -->|More tickets| F
+    R -->|All pass| A["Issue review"]
+    A -->|Frontend| M["User manual evaluation"]
+    A -->|No frontend| D(["Done"])
+    M -->|Approved| D
+    M -->|Changes needed| I
 ```
 
-Nobody wants to touch `src/billing`. Nobody can say exactly why, only that it's worse than it looks.
+`tdd` handles automated scenarios the user selected. `code-review` checks every ticket and the completed issue; it can also review an existing change directly.
 
-```
-/audit  src/billing
-```
+## Skills
 
-Every module in scope gets read and judged on four themes: readability, structure and architecture, efficiency, and current practice for the stack. The report is written **in your language**, with code, options, and the trade-off for each finding.
-
-A pattern repeated across five files is one finding with five locations, not five findings. Anything a formatter would fix is left out. `/audit` reports; it never edits.
-
----
-
-### 5 · The answer is not in your own code
-
-```mermaid
-flowchart LR
-    A["/research"] --> B(["scout the outside"]) --> C(["candidates, you pick"]) --> D(["deep dive + one real spike"]) --> E(["research.md"])
-    E --> F{"Still a choice<br/>to make?"}
-    F -->|"Yes"| G["/discuss-with-docs"]
-    F -->|"No"| H["/write-tickets"]
-    style B fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style C fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style D fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style E fill:#161b22,color:#c9d1d9,stroke:#30363d
-    style F fill:#0d1117,color:#fff,stroke:#30363d
-```
-
-Two situations, one skill: a technology you are weighing up, and a bug that survived `/investigate`.
-
-```
-/research  should we move the reporting queries from Prisma to Drizzle
-```
-
-Wave one is a **scout**: agents in parallel on the official docs and their version matrix, on the source repo's issues and changelog, on the community, and one on your own codebase for fit. What comes back is a short candidate list, and nothing goes deeper until you say which ones are worth it.
-
-Wave two is a **deep dive**, one agent per candidate you kept. Every claim carries its source, the version it applies to, and its date, checked against the versions your project actually pins.
-
-Then the part that separates this from reading blog posts: the one claim the whole recommendation rests on gets a **throwaway spike**, run in a temp folder outside your repo, its output recorded, the folder deleted afterwards. A claim that can't be proved that way is marked unverified with the reason, never quietly dropped.
-
-You are left with `.workspace/<issue-name>/research.md`, and it names its own next step: `/discuss-with-docs` while a choice is still yours to make, `/write-tickets` when the findings are settled work, `/implement` when it turned out to be one small change.
-
----
-
-## The two modes
-
-Whether a repo has a `CONTEXT.md` at its root decides how every skill behaves.
-
-|  | **Own project**<br/>`CONTEXT.md` present | **Legacy**<br/>no `CONTEXT.md` |
+| Skill | Invoked by | What it produces or checks |
 | --- | --- | --- |
-| **Work comes from** | A spec, split into tickets | A ticket you paste from your tracker |
-| **Documents written** | `CONTEXT.md`, `DESIGN.md`, `CLAUDE.md` / `AGENTS.md`, `.workspace/`, `DECISIONS.md` once a decision calls for it, all gitignored | None, beyond `.workspace/` when you ask for it, kept out of the remote via `.git/info/exclude` |
-| **Tests** | An acceptance test per criterion, written before the code, red-green per step | Whatever you choose at the start of `/implement` |
-| **Design rules** | `DESIGN.md` | The components already in the code |
+| `ask-me` | User | One recommended next skill |
+| `plan-project` | User | Project architecture, context, tracker choice, and UI design if needed |
+| `grill-me` | User | Settled decisions in the conversation |
+| `grill-with-docs` | User | Settled decisions, updated domain context, and `spec.md` |
+| `triage` | User | Verified issue category, state, and next action |
+| `to-spec` | User | Detailed spec from already clear requirements |
+| `to-design-brief` | User | Screen-by-screen contract for a requested prototype |
+| `to-tickets` | User | Work-owned tickets and blocking dependencies |
+| `find-ready-tickets` | User | Unblocked tickets available now |
+| `implement` | User | Ticket implementation, agreed checks, and review handoff |
+| `grilling` | Agent or user | One-decision-at-a-time interview discipline |
+| `domain-modeling` | Agent or user | Consistent terms, invariants, and durable decisions |
+| `design-system` | Agent or user | `.workspace/DESIGN.md` before UI briefs and prototypes |
+| `prototype` | Agent or user | Inspectable UI baseline requested by the user |
+| `tdd` | Agent or user | Red-green-refactor for selected automated scenarios |
+| `code-review` | Agent or user | Ticket and whole-issue findings, evidence, and manual guide |
+| `diagnosing-bugs` | Agent or user | Verified root cause and regression scenario |
 
-Run `/setup-project` once to make a repo an own project. An empty repo gets a full interview, with an optional PRD-driven kickoff first; a repo with code gets read for stack, commands, conventions, and tests, and asked only what the code cannot say. Where there is no test suite, it never imposes one.
+User-invoked skills are explicit entry points. Supporting skills can be called by an agent as part of a workflow or requested directly by a user. The source of every skill is in `skills/engineering/<name>/SKILL.md`.
 
----
+## Project files and issue tracking
 
-## Where work lives
+`/plan-project` creates short root `AGENTS.md` and `CLAUDE.md` files that point to `CONTEXT.md`. `CONTEXT.md` is the map to the detailed `.workspace/` records:
 
-Each piece of work lives in one folder. Completed tickets, specs, kickoff documents, approved designs, and comparison evidence stay at their existing paths as history; they are removed only when you ask.
-
-```
+```text
+AGENTS.md
+CLAUDE.md
+CONTEXT.md
 .workspace/
-  PRD.md               written by /setup-project's PRD-driven kickoff
-  DESIGN_BRIEF.md      written by /write-design-brief
-  API_REQUIREMENT.md   written by /discuss-with-docs
-  subscription-tracker/
-    ideas.md                      written by /brainstorm
-    report.md                     written by /investigate
-    research.md                   written by /research
-    spec.md                       written by /discuss-with-docs
-    tickets/
-      01-subscription-model.md    written by /write-tickets
-      02-import-statements.md     ticked and closed by /implement
-      03-renewal-reminders.md
+  ARCHITECTURE.md
+  DOMAIN.md
+  DESIGN.md                    # when the project has UI
+  apps/<app-slug>.md            # only for app-specific differences
+  issues/README.md             # planned outcomes and dependencies
+  issues/<issue-slug>/
+    spec.md
+    design-brief.md            # when a prototype is requested
+    prototype/                 # approved baseline, if any
+    tickets/                   # Markdown tickets or a GitHub link index
 ```
 
-`PRD.md`, `DESIGN_BRIEF.md`, and `API_REQUIREMENT.md` sit directly under `.workspace/`, not inside one issue's folder: retained as kickoff history when its tickets are done. The spec owns subsequent requirement changes.
+Planning covers the project's purpose, application inventory, mono- or multi-repo choice, stack, infrastructure target, module rules, folders, initial database schema, and migration approach. Individual issue specs define the affected pages, endpoints, behavior, data changes, acceptance criteria, and test scenarios. An issue should be small enough to deliver an observable part of a module. Tickets split its work by backend, frontend, infrastructure, and testing only where each type has real work.
 
-`.workspace/` is gitignored in an own project, and kept out of the remote via `.git/info/exclude` in a legacy repo. Nothing here ever reaches a pull request.
+The project chooses a tracker during setup:
 
-> [!NOTE]
-> This folder was named `.issues/` before. If you have one from an earlier version of this set, rename it to `.workspace/` by hand.
+| Tracker | `.workspace/` in Git? | Ticket source of truth |
+| --- | --- | --- |
+| Local Markdown | No | One Markdown file per ticket under the issue's `tickets/` directory |
+| GitHub Issues | Yes | GitHub issue body and status; local `tickets/` holds links only |
 
----
+With GitHub, the tracked workspace can make specs and design references available across machines after those changes are committed and pushed. The skills do not silently commit or push. Never put credentials or secrets in tracked documents. Local tracker state is private to the local checkout unless the user shares it separately.
 
-## Skill reference
+All skill instructions and file identifiers are English. The prose of issue specs, tickets, design briefs, and manual evaluation guides follows the user's input language.
 
-### You type these
+## Design and testing decisions
 
-| Skill | Job |
-| --- | --- |
-| [`/ask-me`](.claude/skills/ask-me/SKILL.md) | Describe your situation, get pointed at the right skill with the reason. |
-| [`/setup-project`](.claude/skills/setup-project/SKILL.md) | Interview an empty repo, or read one that already has code; write `CONTEXT.md`, `DESIGN.md`, and the instruction file either way. Offers a PRD-driven kickoff first for a brand-new product. |
-| [`/brainstorm`](.claude/skills/brainstorm/SKILL.md) | Widen a raw idea: three directions a round until one is clear enough to plan. |
-| [`/discuss`](.claude/skills/discuss/SKILL.md) | Settle a plan one question at a time. Stays in the conversation. |
-| [`/discuss-with-docs`](.claude/skills/discuss-with-docs/SKILL.md) | The same interview, written to `spec.md` for tickets, later sessions, and review. When a PRD-driven kickoff is open, offers an API requirement step first and covers its full scope. |
-| [`/write-design-brief`](.claude/skills/write-design-brief/SKILL.md) | Interview a PRD's features into pages, components, and typography direction, for `/prototype` or an outsourced UI/UX team. |
-| [`/prototype`](.claude/skills/prototype/SKILL.md) | Reproduce HTML/CSS or JPG/PNG designs 1:1, explore options, or refine a page; preserve the approved baseline for implementation. |
-| [`/investigate`](.claude/skills/investigate/SKILL.md) | Prove a bug's root cause with evidence, then route the fix. |
-| [`/triage`](.claude/skills/triage/SKILL.md) | Categorise and verify an issue or PR that arrived from outside, then route it onto the chain or reject it with a reason. |
-| [`/research`](.claude/skills/research/SKILL.md) | Sweep outside sources for what the repo cannot answer, prove the claim that matters, leave a report the chain can use. |
-| [`/audit`](.claude/skills/audit/SKILL.md) | Report where a codebase can improve, as HTML plus a spec. |
-| [`/write-tickets`](.claude/skills/write-tickets/SKILL.md) | Split a spec into tickets with criteria, checklist, and blockers, as local files or GitHub Issues. |
-| [`/find-ready-tickets`](.claude/skills/find-ready-tickets/SKILL.md) | Scan every spec's tickets for the ones ready to build now, without opening each one, and get the exact next command. |
-| [`/implement`](.claude/skills/implement/SKILL.md) | Build one ticket or one plan on the current branch, then hand off to review. |
-| [`/implement-all`](.claude/skills/implement-all/SKILL.md) | Build every open ticket in parallel, one branch each, merged and reviewed as a whole. |
+For UI projects, `DESIGN.md` comes before a design brief or prototype. A small color or size change needs no prototype. When a layout changes, the agent offers one; the user decides. An approved prototype becomes the baseline for the screens, states, and viewports recorded in the spec. Implementation follows that baseline unless the user requests a deviation.
 
-### The agent calls these
+Before tickets are written, backend work always offers unit tests and frontend work always offers browser automation, with concrete use cases. The user may decline either. The spec records the choice, scenario setup, action, expected result, test level, and evidence. Browser automation may use Playwright; it is a recommendation, not a mandatory dependency. Selected automated scenarios can use `tdd` during implementation.
 
-| Skill | Job |
-| --- | --- |
-| [`review`](.claude/skills/review/SKILL.md) | Check a diff on Spec, Standards, Logic & Security, Simplicity, plus UI/UX when the diff is visible. Reports; never edits. |
-| [`discussing`](.claude/skills/discussing/SKILL.md) | The shared interview loop behind every discuss entry point. |
-| [`implementing`](.claude/skills/implementing/SKILL.md) | The shared build loop behind `/implement` and `/implement-all`. |
-| [`designing`](.claude/skills/designing/SKILL.md) | Write or complete `DESIGN.md`, by interview or by extraction from existing code. |
-| [`domain-modeling`](.claude/skills/domain-modeling/SKILL.md) | Sharpen a fuzzy domain term into `CONTEXT.md`, or record a hard-to-reverse decision to `DECISIONS.md`. |
-| [`resolve-merge-conflicts`](.claude/skills/resolve-merge-conflicts/SKILL.md) | Resolve merge conflicts using the spec and both tickets as the reference. |
-| [`find-shortcuts`](.claude/skills/find-shortcuts/SKILL.md) | Ledger every deliberate shortcut `implement` marked in the code, flagging any with no revisit trigger. |
-| [`writing-for-agents`](.claude/skills/writing-for-agents/SKILL.md) | The rules every document here follows. Use it to write your own. |
+Every implementation ticket receives `code-review`. When all tickets pass, an issue-level review checks integration and the spec as a whole. For frontend work, the agent gives the user a manual guide listing the page, action, expected result, and prototype comparison. The issue stays open until the user approves that evaluation.
 
----
+## Source and contribution
 
-## How it thinks
+Add or change a skill in `skills/engineering/`, keep its English `SKILL.md` and `agents/openai.yaml` consistent, and update the routing table in `ask-me` plus this README when the user-facing set changes. No commit or push is performed automatically by these skills.
 
-Six rules run through every skill. They are what make this feel different from prompting.
-
-**One question per turn.** Two to four options, one marked recommended with the reason, and you are always free to answer outside them. A wall of questions gets skimmed; one question gets answered.
-
-**Facts are the agent's job.** A question whose answer is already in your codebase is never asked. It reads `CONTEXT.md`, the conventions, and the code around the change before it opens its mouth.
-
-**Every step ends on a checkable condition.** Not *"understanding reached"* but *"no open decision would change what gets built"*. Vague completion criteria are how agents stop early.
-
-**Review reports; it never edits.** Findings go back to `/implement`, which fixes them and asks for another review. Three rounds at most, then whatever is left comes to you.
-
-**New code takes the shape of its neighbours.** And when a neighbour is clearly flawed, that becomes a question rather than a pattern to copy.
-
-**Nothing is committed unless you ask.** No automatic commits, no automatic pull requests.
-
----
-
-## Repository layout
-
-```
-.claude/skills/<name>/SKILL.md               Claude Code
-.claude/skills/<name>/agents/openai.yaml     Codex metadata
-.agents/skills/<name>/                       the same tree, for Codex and others
-```
-
-Both trees hold the same skills; the `skills` CLI reads either one and installs to whichever agents you have. Shared reference files (`MODES.md`, `TICKET-FORMAT.md`, `SPEC-FORMAT.md`, `REPORT-FORMAT.md`, `RESEARCH-FORMAT.md`, `DESIGN-FORMAT.md`, `CONTEXT-FORMAT.md`, `PRD-FORMAT.md`, `DESIGN_BRIEF-FORMAT.md`, `API_REQUIREMENT-FORMAT.md`, `SHORTCUT-FORMAT.md`, `FIDELITY.md`) live beside the skill that owns them and are pointed at from every skill that shares them.
-
-**Manual install**, if you'd rather not use the CLI:
-
-- **Claude Code, every project:** copy each skill folder into `~/.claude/skills/`
-- **Codex and other agents:** copy each skill folder into `.agents/skills/` (repo) or `~/.agents/skills/` (user)
-
----
-
-## Adding your own skill
-
-Call `writing-for-agents`. It carries the naming rules, the layout, and the pruning pass every document here has been through. The short version:
-
-- A core skill is one bare verb (`discuss`); a variant of it adds a suffix (`discuss-with-docs`).
-- A loop that several skills share is a gerund (`discussing`).
-- A supporting skill is verb plus object (`resolve-merge-conflicts`).
-- Every skill ships an `agents/openai.yaml` so it works outside Claude Code.
-- Every new skill gets a row in `ask-me` and in this README, in the same change.
-
-Open an issue or send a PR, either works.
-
----
-
-<div align="center">
-
-**[MIT](LICENSE)** · Built for people who would rather answer one good question than rewrite an hour of guesses.
-
-</div>
+The folder layout and user/model invocation split take inspiration from [Matt Pocock's skills](https://github.com/mattpocock/skills); the workflow and artifact contracts here follow this package's own requirements.
