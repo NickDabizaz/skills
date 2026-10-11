@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Ui Craft"
+  short_description: "The invisible details that make an interface feel right: press feedback, entrance scale, ori..."
+policy:
+  allow_implicit_invocation: true

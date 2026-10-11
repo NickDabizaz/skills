@@ -1,148 +1,257 @@
 # Skills
 
-Engineering skills for turning a project idea or existing codebase into planned, designed, ticketed, implemented, and reviewed software. The package is a collection of agent instructions: no runtime, build step, or framework is required.
+> Agent skills for building software you can trust: understand what to build, build it well, and prove it works.
 
-```sh
-npx skills add NickDabizaz/skills
-```
+`npx skills add NickDabizaz/skills`
 
-Choose the skills and agent in the installer. Install all 17 for the full workflow; a selective install also needs the supporting skills called by its chosen entry points. This repository keeps one source tree at [`skills/engineering/`](skills/engineering/). The installer places selected skills in the directory used by the selected agent.
+---
+
+## The idea
+
+Two rooms of a Michelin restaurant.
+
+**The dining room knows the guest.** Before anyone cooks, the restaurant learns who is coming, what they need, and what a great result looks like. Planning asks the hard questions early and turns the answers into a spec and tickets.
+
+**The kitchen sends out one excellent plate.** The head chef already knows the dish from the dining room. The chef does not improvise. They delegate each part to a specialist, hold the quality bar, and prove the plate is right before it leaves.
+
+Design is the plating: a brief says what to make, a prototype shows it, and both are held to a craft bar.
+
+The result is two abilities: knowing what to build, and building it in a way you can trust without reading every line.
+
+## The five stages
+
+| Stage | You bring | It produces |
+| --- | --- | --- |
+| 1. Planning | an idea, a change, or an incoming issue | a spec and tickets |
+| 2. Design | an approved spec | a design brief and/or a prototype |
+| 3. Development | a ready ticket | working code on a branch |
+| 4. Testing | code and agreed scenarios | verified scenarios with evidence |
+| 5. Review and commit | verified work | a reviewed change and a PR |
 
 ## Start here
 
-Run `/ask-me` when you are unsure what to do next. For a new product or an existing repository without project context, begin with `/plan-project`. It inspects what exists, helps settle the application boundaries, stack, infrastructure, modules, data model, and issue tracker, and writes the project's agent-facing context. It plans the foundation; implementation happens through tickets.
+- `ask-me` picks the right next step when you are unsure where to start.
+- `head-chef` runs the kitchen: it takes a ticket and executes it with delegation and verification.
+
+Two example flows:
 
 ```text
-/plan-project  A customer portal and internal operations app sharing one database
-/grill-with-docs  Add customer invitation to the account module
-/to-tickets  .workspace/issues/customer-invitation/spec.md
-/find-ready-tickets
-/implement  .workspace/issues/customer-invitation/tickets/01-backend-invitation.md
+idea -> grilling -> to-spec -> to-tickets -> head-chef -> code-review -> commit -> ship
+idea -> to-spec -> design-brief -> prototype -> to-tickets -> head-chef
 ```
 
-Use `/grill-me` when you want to settle a change in conversation first. It offers `/to-spec` when the decisions are complete. Use `/grill-with-docs` when you want that interview to update project/domain docs and write the issue spec directly. A clear existing plan can go straight to `/to-spec`.
+## Stage by stage
 
-Every skill ends by reporting its result and offering the next relevant step. An offer does not silently run a user-invoked skill; if a decision is missing, the skill names the blocker instead.
+### 1. Planning: know what to build
 
-## The flow
+You bring: an idea, a change, or an incoming issue. It produces: a spec and tickets.
 
-### 1. Plan the project
+Planning asks the hard questions early, so the kitchen never has to guess. Questions come first, the spec second, tickets last.
 
 ```mermaid
 flowchart LR
-    A["ask-me"] --> P["plan-project"]
-    P --> C["Architecture, domain, issue map"]
-    P -->|Project has UI| D["design-system: DESIGN.md"]
+  I["idea, change, or issue"] --> G["Grill<br/>grill-me or grill-with-docs"]
+  G --> D["domain-modeling<br/>agree on the vocabulary"]
+  D --> S["to-spec<br/>write it down"]
+  S --> T["to-tickets<br/>slice into work"]
+  T --> O(["spec + tickets"])
+  O --> H["handoff"]
+  R["research / wayfinder"] --> G
+  X["triage / diagnosing-bugs"] --> G
 ```
 
-### 2. Define an issue
+Skills: `grilling`, `grill-me`, `grill-with-docs`, `domain-modeling`, `to-spec`, `to-tickets`, `wayfinder`, `research`, `triage`, `diagnosing-bugs`, `handoff`, `codebase-design`, `to-questionnaire`
+
+Output lives in your workspace, as `spec.md` and a `tickets/` folder. See [Workspace and files](#workspace-and-files).
+
+### 2. Design: the plating
+
+You bring: an approved spec. It produces: a design brief, a prototype, or both.
+
+A brief says what to make; a prototype shows it. The line between them is flexible. Stop at the brief and design by hand, or continue to a prototype the agent builds. Both are held to the same craft bar, and both live inside your workspace.
 
 ```mermaid
 flowchart LR
-    U["Unclear idea"] --> G["grill-me"] --> S["to-spec"]
-    U --> GD["grill-with-docs: writes spec"]
-    C["Clear requirements"] --> S
-    I["Incoming issue"] --> T["triage"] --> S
+  S(["approved spec"]) --> B["design-brief<br/>screens, states, direction"]
+  B --> P["prototype<br/>variants behind a picker"]
+  S --> P
+  P --> R["design-review<br/>hold the craft bar"]
 ```
 
-`grilling` guides the interviews; `domain-modeling` keeps shared terms and rules consistent. For a bug with an unknown cause, `triage` can call `diagnosing-bugs` before the spec is written.
+Skills: `design-brief`, `prototype`, `design-review`
 
-### 3. Design and divide the work
+Output lives in your workspace: the brief at `.workspace/design/<feature>/brief.md`, and the prototype at `.workspace/prototype/<topic>/index.html`.
+
+### 3. Development: the head chef
+
+You bring: a ready ticket. It produces: working code on a branch.
+
+The head chef already knows the dish from planning, so it does not improvise. It picks the right playbook, delegates the parts to specialists, and verifies on the real surface before calling it done. The support skills it reaches for, like sketch-first design, parallel candidates, and adversarial review, are called automatically as the work needs them.
 
 ```mermaid
 flowchart LR
-    S["Approved spec"] --> Q{"Prototype requested?"}
-    Q -->|Yes| B["to-design-brief"] --> P["prototype"] --> T["to-tickets"]
-    Q -->|No| T
+  T(["ready ticket"]) --> H["head-chef<br/>pick the playbook"]
+  H --> W["delegate to subagents"]
+  W --> V["verify on the real surface"]
+  V --> C(["working code on a branch"])
 ```
 
-The prototype uses `DESIGN.md` and becomes the visual baseline only after approval.
+Skills: `head-chef`
 
-### 4. Build and accept
+### 4. Testing: evidence over claims
+
+You bring: code and the agreed scenarios. It produces: verified scenarios with evidence.
+
+A test is an artifact, not a claim. Where a test fits, it is written first and watched to fail before it passes. Where it does not, a project-local way to drive the app proves the behavior on the real surface, and any number you report is checked before you trust it.
 
 ```mermaid
 flowchart LR
-    T["to-tickets"] --> F["find-ready-tickets"] --> I["implement"]
-    I --> R["code-review"]
-    R -->|Changes needed| I
-    R -->|More tickets| F
-    R -->|All pass| A["Issue review"]
-    A -->|Frontend| M["User manual evaluation"]
-    A -->|No frontend| D(["Done"])
-    M -->|Approved| D
-    M -->|Changes needed| I
+  C(["code + scenarios"]) --> T["tdd<br/>red, green, tidy"]
+  T --> V["drive the app<br/>capture evidence"]
+  V --> E(["verified scenarios"])
 ```
 
-`tdd` handles automated scenarios the user selected. `code-review` checks every ticket and the completed issue; it can also review an existing change directly.
+Skills: `tdd`, `create-verification-skill`, `maintain-verification-skill`, `benchmark-checklist`, `blast-radius`
+
+### 5. Review and commit: the pass
+
+You bring: verified work. It produces: a reviewed change and a PR.
+
+Before the plate leaves, a reviewer checks the change against the spec and the repo's standards, the evidence is stated plainly, and the change is committed with a pull request that tells a reviewer why it exists and how it was proven.
+
+```mermaid
+flowchart LR
+  W(["verified work"]) --> R["code-review<br/>standards + spec"]
+  R --> P["pr<br/>shape the pull request"]
+  P --> C(["reviewed change + PR"])
+  C -->|ready to launch| S["ship<br/>launch checklist, rollout, rollback"]
+```
+
+Skills: `code-review`
+
+When the change is ready to go live, `ship` prepares the launch: the pre-launch checklist, monitoring, a staged rollout, and a rollback plan.
 
 ## Skills
 
-| Skill | Invoked by | What it produces or checks |
-| --- | --- | --- |
-| `ask-me` | User | One recommended next skill |
-| `plan-project` | User | Project architecture, context, tracker choice, and UI design if needed |
-| `grill-me` | User | Settled decisions in the conversation |
-| `grill-with-docs` | User | Settled decisions, updated domain context, and `spec.md` |
-| `triage` | User | Verified issue category, state, and next action |
-| `to-spec` | User | Detailed spec from already clear requirements |
-| `to-design-brief` | User | Screen-by-screen contract for a requested prototype |
-| `to-tickets` | User | Work-owned tickets and blocking dependencies |
-| `find-ready-tickets` | User | Unblocked tickets available now |
-| `implement` | User | Ticket implementation, agreed checks, and review handoff |
-| `grilling` | Agent or user | One-decision-at-a-time interview discipline |
-| `domain-modeling` | Agent or user | Consistent terms, invariants, and durable decisions |
-| `design-system` | Agent or user | `.workspace/DESIGN.md` before UI briefs and prototypes |
-| `prototype` | Agent or user | Inspectable UI baseline requested by the user |
-| `tdd` | Agent or user | Red-green-refactor for selected automated scenarios |
-| `code-review` | Agent or user | Ticket and whole-issue findings, evidence, and manual guide |
-| `diagnosing-bugs` | Agent or user | Verified root cause and regression scenario |
+**Entry**
 
-User-invoked skills are explicit entry points. Supporting skills can be called by an agent as part of a workflow or requested directly by a user. The source of every skill is in `skills/engineering/<name>/SKILL.md`.
+| Skill | What it does |
+| --- | --- |
+| `ask-me` | Routes your situation to the next skill. |
+| `setup` | Configures a repository once: trackers, vocabulary, defaults. |
 
-## Project files and issue tracking
+**Planning**
 
-`/plan-project` creates short root `AGENTS.md` and `CLAUDE.md` files that point to `CONTEXT.md`. `CONTEXT.md` is the map to the detailed `.workspace/` records:
+| Skill | What it does |
+| --- | --- |
+| `grilling` | The core interview that sharpens a plan until it is clear. |
+| `grill-me` | A quick, stateless grilling pass. |
+| `grill-with-docs` | Grilling that also writes the domain docs and spec. |
+| `domain-modeling` | Keeps terms, invariants, and decisions consistent. |
+| `to-spec` | Turns a settled conversation into a spec. |
+| `to-tickets` | Slices a spec into work items with blocking edges. |
+| `wayfinder` | Plans work too big for one session as a map of decisions. |
+| `research` | Investigates a question against primary sources, with cited notes. |
+| `triage` | Classifies an incoming issue and verifies its claim. |
+| `diagnosing-bugs` | Finds a bug's root cause and a regression scenario. |
+| `handoff` | Compacts the conversation for another session. |
+| `codebase-design` | Shared vocabulary for deep, well-seamed modules. |
+| `to-questionnaire` | Turns a decision into a questionnaire for someone else. |
+| `writing-for-agents` | How to write skills and agent-facing docs. |
+
+**Design**
+
+| Skill | What it does |
+| --- | --- |
+| `design-brief` | Writes the brief: screens, states, direction, motion intent. |
+| `prototype` | Builds an interactive prototype, variants behind a picker or one. |
+| `design-review` | Reviews UI and motion, finds gaps, audits, stress-tests data. |
+
+**Execution**
+
+| Skill | What it does |
+| --- | --- |
+| `head-chef` | The execution mode; routes to playbooks and delegates. |
+| `architect` | Sketches interfaces before code, exploring alternatives. |
+| `arena` | Runs competing candidates, picks a base, grafts the best. |
+| `swarm` | Fans out parallel workers for coverage or races. |
+| `interrogate` | Adversarial multi-model review of a change. |
+| `how` | Explains how a subsystem works. |
+| `why` | Reconstructs why something is the way it is. |
+| `teach` | Explains work until the person understands. |
+| `recall` | Rebuilds your recent working context as a brief. |
+| `figure-it-out` | Designs a bespoke, auditable workflow when no playbook fits. |
+| `create-verification-skill` | Generates a project-local way to drive the app. |
+| `maintain-verification-skill` | Keeps that verification honest over time. |
+| `show-me-your-work` | Keeps a reviewable decision trail. |
+| `benchmark-checklist` | Vets a number before you act on it. |
+| `blast-radius` | Finds what a change could break, beyond the diff. |
+| `correct` | Turns repeated mistakes into structural guards. |
+| `reflect` | Reviews a session and routes learnings into skills. |
+| `no-comments` | Keeps only the comments that earn their place. |
+| `unslop` | Removes AI writing tells from prose. |
+| `technical-writing` | A layered standard for docs, PRs, and commit messages. |
+| `bro` | Restates the last message in plain language. |
+
+**Testing**
+
+| Skill | What it does |
+| --- | --- |
+| `tdd` | Test-first: red-green for features, regression-first for bugs. |
+
+**Review, commit, and launch**
+
+| Skill | What it does |
+| --- | --- |
+| `code-review` | Reviews a change on standards and spec axes. |
+| `pr` | Shapes the pull request body around evidence. |
+| `retro` | Runs a retrospective and proposes environment improvements. |
+| `improve-codebase-architecture` | Scans for structural improvements. |
+| `ship` | Prepares a production launch: checklist, monitoring, rollout, rollback. |
+
+## Principles
+
+Principles are small skills you read on demand. `head-chef` cites the ones it applies.
+
+**Engineering:** `principle-prove-it-works`, `principle-sequence-verifiable-units`, `principle-test-behavior-not-implementation`, `principle-fix-root-causes`, `principle-explain-the-number`, `principle-model-the-domain`, `principle-boundary-discipline`, `principle-type-system-discipline`, `principle-separate-before-serializing-shared-state`, `principle-make-operations-idempotent`, `principle-migrate-callers-then-delete-legacy-apis`, `principle-laziness-protocol`, `principle-subtract-before-you-add`, `principle-minimize-reader-load`, `principle-outcome-oriented-execution`, `principle-foundational-thinking`, `principle-redesign-from-first-principles`, `principle-attack-the-premise`, `principle-experience-first`, `principle-exhaust-the-design-space`, `principle-build-the-lever`, `principle-guard-the-context-window`, `principle-never-block-on-the-human`, `principle-encode-lessons-in-structure`.
+
+**Design:** `principle-motion-decision`, `principle-fluid-interfaces`, `principle-ui-craft`, `principle-worst-case-data`, `principle-mobile-native`.
+
+## Workspace and files
+
+- Specs, tickets, and project notes live in your workspace, in `.workspace/`, unless a hosted tracker is chosen.
+- Design briefs live in the workspace at `.workspace/design/<feature>/brief.md`.
+- Prototypes live in the workspace at `.workspace/prototype/<topic>/index.html`, self-contained and openable in a browser.
+- Tracker choice: local Markdown, or a hosted tracker such as GitHub Issues.
+- All skill instructions and identifiers are English. Project prose follows the user's language.
+
+## Install and choose skills
+
+- The installer lets you pick skills and the target agent.
+- A selective install still needs the supporting skills its entry points call.
+
+## Where this comes from
+
+Three open, MIT licensed sources, adapted into one workflow:
+
+- **Planning and workflow ideas:** Matt Pocock (`mattpocock/skills`).
+- **Execution and verification ideas:** pstack by Lauren Tan (poteto) (`cursor/plugins`).
+- **Design and motion craft:** Emil Kowalski (`emilkowalski/skills`).
+
+Each source keeps its copyright notice. See [LICENSE](LICENSE).
+
+## Repository layout
 
 ```text
-AGENTS.md
-CLAUDE.md
-CONTEXT.md
-.workspace/
-  ARCHITECTURE.md
-  DOMAIN.md
-  DESIGN.md                    # when the project has UI
-  apps/<app-slug>.md            # only for app-specific differences
-  issues/README.md             # planned outcomes and dependencies
-  issues/<issue-slug>/
-    spec.md
-    design-brief.md            # when a prototype is requested
-    prototype/                 # approved baseline, if any
-    tickets/                   # Markdown tickets or a GitHub link index
+skills/<name>/
+  SKILL.md
+  agents/openai.yaml
 ```
 
-Planning covers the project's purpose, application inventory, mono- or multi-repo choice, stack, infrastructure target, module rules, folders, initial database schema, and migration approach. Individual issue specs define the affected pages, endpoints, behavior, data changes, acceptance criteria, and test scenarios. An issue should be small enough to deliver an observable part of a module. Tickets split its work by backend, frontend, infrastructure, and testing only where each type has real work.
+## Contribution
 
-The project chooses a tracker during setup:
+Add or change a skill in `skills/`, keep its `SKILL.md` and `agents/openai.yaml` consistent, and update the routing table in `ask-me` and this README when the user-facing set changes. No commit or push is performed automatically by these skills.
 
-| Tracker | `.workspace/` in Git? | Ticket source of truth |
-| --- | --- | --- |
-| Local Markdown | No | One Markdown file per ticket under the issue's `tickets/` directory |
-| GitHub Issues | Yes | GitHub issue body and status; local `tickets/` holds links only |
+## License
 
-With GitHub, the tracked workspace can make specs and design references available across machines after those changes are committed and pushed. The skills do not silently commit or push. Never put credentials or secrets in tracked documents. Local tracker state is private to the local checkout unless the user shares it separately.
-
-All skill instructions and file identifiers are English. The prose of issue specs, tickets, design briefs, and manual evaluation guides follows the user's input language.
-
-## Design and testing decisions
-
-For UI projects, `DESIGN.md` comes before a design brief or prototype. A small color or size change needs no prototype. When a layout changes, the agent offers one; the user decides. An approved prototype becomes the baseline for the screens, states, and viewports recorded in the spec. Implementation follows that baseline unless the user requests a deviation.
-
-Before tickets are written, backend work always offers unit tests and frontend work always offers browser automation, with concrete use cases. The user may decline either. The spec records the choice, scenario setup, action, expected result, test level, and evidence. Browser automation may use Playwright; it is a recommendation, not a mandatory dependency. Selected automated scenarios can use `tdd` during implementation.
-
-Every implementation ticket receives `code-review`. When all tickets pass, an issue-level review checks integration and the spec as a whole. For frontend work, the agent gives the user a manual guide listing the page, action, expected result, and prototype comparison. The issue stays open until the user approves that evaluation.
-
-## Source and contribution
-
-Add or change a skill in `skills/engineering/`, keep its English `SKILL.md` and `agents/openai.yaml` consistent, and update the routing table in `ask-me` plus this README when the user-facing set changes. No commit or push is performed automatically by these skills.
-
-The folder layout and user/model invocation split take inspiration from [Matt Pocock's skills](https://github.com/mattpocock/skills); the workflow and artifact contracts here follow this package's own requirements.
+MIT. See [LICENSE](LICENSE).

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Design Brief"
+  short_description: "Turn an approved spec into a design brief: the screens and states, layout regions, content i..."
+policy:
+  allow_implicit_invocation: true

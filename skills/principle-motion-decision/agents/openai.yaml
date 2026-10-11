@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Motion Decision"
+  short_description: "Decide whether a UI element should animate at all, and if so its purpose, easing, and durati..."
+policy:
+  allow_implicit_invocation: true

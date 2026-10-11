@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Tickets"
+  short_description: "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each de..."
+policy:
+  allow_implicit_invocation: true

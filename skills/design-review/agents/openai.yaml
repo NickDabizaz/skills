@@ -1,0 +1,5 @@
+interface:
+  display_name: "Design Review"
+  short_description: "Review UI and motion against a high craft bar, find missing motion, audit a whole codebase a..."
+policy:
+  allow_implicit_invocation: true

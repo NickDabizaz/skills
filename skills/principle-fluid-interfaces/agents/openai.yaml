@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Fluid Interfaces"
+  short_description: "Make gesture-driven and interactive UI feel physical: direct manipulation, interruptibility,..."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Mobile Native"
+  short_description: "Make a web app feel native on a phone: the small CSS and meta fixes around hover, tap, viewp..."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Prototype"
+  short_description: "Build an interactive prototype of a UI piece, either several genuinely different variants be..."
+policy:
+  allow_implicit_invocation: true

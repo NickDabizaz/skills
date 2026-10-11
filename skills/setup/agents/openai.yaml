@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup"
+  short_description: "Configure a repository for this skill set: its issue/detail trackers, triage vocabulary, dom..."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask Me"
+  short_description: "Routes your situation to the right skill in this package, and answers setup and troubleshoot..."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wayfinder"
+  short_description: "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision..."
+policy:
+  allow_implicit_invocation: true

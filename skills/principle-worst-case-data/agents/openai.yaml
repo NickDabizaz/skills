@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Worst Case Data"
+  short_description: "Test UI against the realistic worst case of every value it renders: long names, unbreakable ..."
+policy:
+  allow_implicit_invocation: true

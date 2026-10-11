@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship"
+  short_description: "Prepare a production launch: checklist, monitoring, rollout, rollback"
+policy:
+  allow_implicit_invocation: true

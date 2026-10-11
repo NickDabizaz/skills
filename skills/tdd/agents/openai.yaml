@@ -1,0 +1,5 @@
+interface:
+  display_name: "TDD"
+  short_description: "Test-driven development done well. A red-green loop for features at agreed seams, and a regr..."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Technical Writing"
+  short_description: "Layered technical-writing standard: Diátaxis structure, Google developer style sentences, ST..."
+policy:
+  allow_implicit_invocation: true
