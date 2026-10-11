@@ -28,16 +28,20 @@ The result is two abilities: knowing what to build, and building it in a way you
 | 4. Testing | code and agreed scenarios | verified scenarios with evidence |
 | 5. Review and commit | verified work | a reviewed change and a PR |
 
+`head-chef` runs one ticket at a time. `ship-project` chains all five stages from a single project description, with the agent as PM.
+
 ## Start here
 
 - `ask-me` picks the right next step when you are unsure where to start.
 - `head-chef` runs the kitchen: it takes a ticket and executes it with delegation and verification.
+- `ship-project` runs the whole lifecycle from one project description, with the agent as PM and the human at only two gates: the spec and the deploy.
 
-Two example flows:
+Two example flows, plus the whole-project run:
 
 ```text
 idea -> grilling -> to-spec -> to-tickets -> head-chef -> code-review -> commit -> ship
 idea -> to-spec -> design-brief -> prototype -> to-tickets -> head-chef
+project description -> ship-project -> (Gate 1: spec) -> design + dev + verify -> (Gate 2: deploy) -> ship
 ```
 
 ## Stage by stage
@@ -139,6 +143,7 @@ When the change is ready to go live, `ship` prepares the launch: the pre-launch 
 | --- | --- |
 | `ask-me` | Routes your situation to the next skill. |
 | `setup` | Configures a repository once: trackers, vocabulary, defaults. |
+| `ship-project` | Runs a whole project from one description, with the agent as PM, and hands back for deploy. |
 
 **Planning**
 

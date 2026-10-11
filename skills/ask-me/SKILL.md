@@ -12,6 +12,7 @@ Read the project context and any workspace state that exists, then recommend one
 | Situation | Next skill |
 | --- | --- |
 | A new project, or a repo with no project context, or a change to the project foundation | `setup` |
+| A complete project description you want run end to end, with the agent as PM and the human at only the spec and deploy gates | `ship-project` |
 | An unclear idea or change, no document requested | `grilling` (or `grill-me` for a quick pass) |
 | An unclear issue that should be documented while you talk | `grill-with-docs` |
 | An incoming issue that needs classification or more information | `triage` |

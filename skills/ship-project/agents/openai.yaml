@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship Project"
+  short_description: "Drive an entire project from a full description to deploy-ready with the agent as PM: auto-gr..."
+policy:
+  allow_implicit_invocation: true
